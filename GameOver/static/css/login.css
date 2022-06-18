@@ -1,0 +1,125 @@
+body {
+    background-image: url(/media/login-register-background-3.jpg);
+    background-color: #cccccc;
+    height: 500px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a {
+    border: none;
+    left: 0px;
+    padding: 0 10px;
+    font-size: 14px;
+    height: auto;
+    position: relative;
+
+}
+
+a:-webkit-any-link {
+    cursor: pointer;
+}
+
+.foot {
+    animation-duration: 5s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+
+}
+
+@keyframes pulse {
+    50% {box-shadow: 0px -1px 20px indigo;}
+
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 550px;
+    max-height: 420px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin {
+    font-weight: 400;
+    margin-top: 10em;
+    margin-bottom: 10em;
+    padding: 2em;
+    background-color: rgb(250, 250, 250) !important;
+    border-radius: 7px;
+    padding-top: 1.5em;
+    box-shadow: 0 0 10px 7px #0000003d;
+
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.btn  {
+
+    background-color: #6D28D9 !Important;
+    border-color: #6D28D9 !Important;
+
+}
+
+.btn:hover{
+    color:#DDDDDD;
+    border-color:#DDDDDD;
+}
+
+.btn:active{
+    color:#BBBBBB;
+    border-color:#BBBBBB;
+    }
+    @media all and (max-width:30em){
+        a.button2{
+        display:block;
+        margin:0.4em auto;
+    }
+}
+
+.btn-success {
+    width: 100%;
+    height: 2.5em;
+}
+
+.login-help {
+    color: rgb(114,124,129);
+    font-size: 16px;
+
+}
+
+.input {
+    margin-bottom: 8px;
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.text-logo {
+    font-size: 32px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.alert-danger {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.option-register {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+    color: rgb(134, 134, 134);
+}

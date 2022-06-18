@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+
 {% load humanize %}
 {% load static %}
+
 {% block title %}
 Producto
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/detail-product.css' %}">
+<link rel="stylesheet" href="{% static 'css/detail-products.css' %}">
 <link rel="stylesheet" href="{% static 'css/smoothproducts.css' %}"> 
 {% endblock %}
 
@@ -38,9 +40,10 @@ Producto
                     <span id="object-name">{{object.name}}</span>
                 </div>
             </div>
-            <div class="sp-loading"><img src="{{object.image.url}}" alt="{{object.name}}"></div>
+            <div class="sp-loading "><img src="{{object.image.url}}" alt="{{object.name}}"></div>
             <div class="sp-wrap">
-                {% if object.image %}<a href="{{object.image.url}}" alt="{{object.name}}"><img src="{{object.image.url}}" alt="{{object.name}}"></a>{% endif %}
+                {% if object.image %}<a href="{{object.image.url}}" alt="{{object.name}}"><img src="{{object.image.url}}" alt="{{object.name}}"></a>
+                {% else %}<a href="{% static 'media/not-available.png' %}" alt="{{object.name}}"><img src="{% static 'media/not-available.png' %}" alt="{{object.name}}"></a>{% endif %}
                 {% if object.image2 %}<a href="{{object.image2.url}}" alt="{{object.name}}"><img src="{{object.image2.url}}" alt="{{object.name}}"></a>{% endif %}
                 {% if object.image3 %}<a href="{{object.image3.url}}" alt="{{object.name}}"><img src="{{object.image3.url}}" alt="{{object.name}}"></a>{% endif %}
                 {% if object.image4 %}<a href="{{object.image4.url}}" alt="{{object.name}}"><img src="{{object.image4.url}}" alt="{{object.name}}"></a>{% endif %}
@@ -117,7 +120,7 @@ Producto
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <img src="{{item.image.url}}" alt="Category image" class="w-100">
+                                    <img src="{% if product.image %}{{item.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="Category image" class="w-100">
                                 </div>
                                 <h4>{{item.name}}</h4>
                                 <a href="/products/detail-product/{{item.id}}" class="input center-block">
