@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from products.models import products
+from products.models import Products
 
 # Create your views here.
 def index(request):
-    product = products.objects.filter(inStock = True)
-    context = {'product':product}
+    available_products = Products.objects.filter(inStock = True)
+    context = {'available_products':available_products}
     return render(request, 'index.html', context=context)

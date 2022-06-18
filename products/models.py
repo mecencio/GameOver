@@ -1,7 +1,7 @@
 from django.db import models
 
 # Clase: registra en la BD las categorias en la página.
-class category(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=20)
 #    image = models.ImageField(upload_to = "Category Images", null=True, blank=True)
 
@@ -14,8 +14,8 @@ class category(models.Model):
 
 
 # Clase: registra en la BD los productos en la página.
-class products(models.Model):
-    category = models.ForeignKey(category, related_name="products", on_delete=models.CASCADE)
+class Products(models.Model):
+    category = models.ForeignKey(Category, related_name="products", on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     price = models.FloatField()
     description = models.CharField(max_length=200, blank=True, null=True)
@@ -32,6 +32,7 @@ class products(models.Model):
     class Meta:
         verbose_name = 'producto'
         verbose_name_plural = 'productos'
+        ordering = ('-price',)
 
     def __str__(self):
         return self.name

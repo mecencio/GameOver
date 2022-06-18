@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} | GameOver</title>
-    <link rel="shortcut icon" href="{% static 'media/ico/favicon.ico' %}">
+    <!-- Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/media/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/media/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/media/icons/favicon-16x16.png' %}">
     <!-- My style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Owl Carousel -->
@@ -32,27 +35,10 @@
                                 Productos
                             </a>
                             <ul class="dropdown-menu"> <!-- Se va a mostrar cada categoría creada. -->
-                                <li><a class="dropdown-item"
-                                        href="#">Motherboards</a>
+                                {% for category in categories %}
+                                <li><a class="dropdown-item" href="/products/search-category-product/?search={{category.name}}">{{category.name}}</a>
                                 </li>
-                                <li><a class="dropdown-item"
-                                        href="#">Procesadores</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="#">Almacenamiento</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="#">Memorias RAM</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="#">Gabinetes</a></li>
-                                <li><a class="dropdown-item"
-                                        href="#">Fuentes</a></li>
-                                <li><a class="dropdown-item"
-                                        href="#">Refrigeracion</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="#">Placas de video</a></li>
+                                {% endfor %}
                             </ul>
                         </li>
                         <li>
@@ -63,7 +49,7 @@
                         </li>
                     </ul>
                 </div>
-                <form action="#" class="block-search">
+                <form action="products/search-product/" class="block-search">
                     <span class="sr-only">Buscar</span>
                     <button type="submit">
                         <span class="absolute inset-y-2 right-0 flex items-center">
@@ -133,11 +119,11 @@
                 <div class="col-6 col-lg-2 mb-3">
                     <h5 class="h5-footer">Categorias</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Placas de videos</a></li>
-                        <li class="mb-2"><a href="#">Procesadores</a></li>
-                        <li class="mb-2"><a href="#">Memorias</a></li>
-                        <li class="mb-2"><a href="#">Almacenamiento</a></li>
-                        <li class="mb-2"><a href="#">Todas las categorias</a></li>
+                        <li class="mb-2"><a href="/products/search-category-product/?search=Placas+de+videos">Placas de videos</a></li>
+                        <li class="mb-2"><a href="/products/search-category-product/?search=Procesadores">Procesadores</a></li>
+                        <li class="mb-2"><a href="/products/search-category-product/?search=Memorias">Memorias</a></li>
+                        <li class="mb-2"><a href="/products/search-category-product/?search=Almacenamiento">Almacenamiento</a></li>
+                        <li class="mb-2"><a href="/products/search-category-product/?search=">Todas las categorias</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2 mb-3">
@@ -153,15 +139,15 @@
                 <div class="col-6 col-lg-2 mb-3">
                     <h5 class="h5-footer">Nosotros</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2">Quienes Somos</li>
-                        <li class="mb-2">Contáctenos</li>
+                        <li class="mb-2"><a href="#">Quienes Somos</a></li>
+                        <li class="mb-2"><a href="#">Contáctenos</a></li>
                     </ul>
                     <h5 class="h5-footer">Ayuda</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2">FAQ</li>
-                        <li class="mb-2">Términos y Condiciones</li>
-                        <li class="mb-2">Politica de privacidad</li>
-                        <li class="mb-2">Botón de arrepentimiento</li>
+                        <li class="mb-2"><a href="#">FAQ</a></li>
+                        <li class="mb-2"><a href="#">Términos y Condiciones</a></li>
+                        <li class="mb-2"><a href="#">Politica de privacidad</a></li>
+                        <li class="mb-2"><a href="#">Botón de arrepentimiento</a></li>
                     </ul>
                 </div>
             </div>
