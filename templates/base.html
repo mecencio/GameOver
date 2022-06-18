@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | GameOver</title>
+    <link rel="shortcut icon" href="{% static 'media/ico/favicon.ico' %}">
+    <!-- My style -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <!-- Tailwind Css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <header class="background-white"> <!-- Empieza el header -->
+        <nav class="border-b border-gray-300 back bg-indigo nav-header"> <!-- Empieza el Navbar -->
+            <div class="max-w-6xl mx-auto py-2 px-6 xl:px-0 flex items-center justify-between">
+                <div class="menu-left flex items-center space-x-6">
+                    <span class="py-4 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-700 to-violet-700">
+                        Game Over
+                    </span>
+                    <ul class="flex items-center space-x-4">
+                        <li><a class="" href="/">Inicio</a></li>
+                        <li>
+                            <a class="dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Productos
+                            </a>
+                            <ul class="dropdown-menu"> <!-- Se va a mostrar cada categoría creada. -->
+                                <li><a class="dropdown-item"
+                                        href="#">Motherboards</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="#">Procesadores</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="#">Almacenamiento</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="#">Memorias RAM</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="#">Gabinetes</a></li>
+                                <li><a class="dropdown-item"
+                                        href="#">Fuentes</a></li>
+                                <li><a class="dropdown-item"
+                                        href="#">Refrigeracion</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="#">Placas de video</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Armá tu PC</a>
+                        </li>
+                        <li>
+                            <a href="#">Pedí tu componente</a>
+                        </li>
+                    </ul>
+                </div>
+                <form action="#" class="block-search">
+                    <span class="sr-only">Buscar</span>
+                    <button type="submit">
+                        <span class="absolute inset-y-2 right-0 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 traslation-down" fill="none" viewBox="0 0 24 24" stroke="#94a3b8" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </span>
+                    </button>
+                    <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Buscar" type="text" aria-label="Search" name="search" />
+                </form>
+                <div class="menu-right flex items-center space-x-4 dropdown">
+                    <!-- include 'cart/menu_cart.html' -->
+                </div>
+                {% if request.user.is_authenticated %}
+                <div class="menu-right flex items-center space-x-4 dropdown">
+                    <a href="#" aria-expanded="false" role="button" data-bs-toggle="dropdown"
+                        aria-label="Menú de usuario, {{request.user.username}}">
+                        <span>
+                            <span class="nav-header-user">
+                            </span>
+                            <span class="nav-user-name">{{request.user.first_name}}</span>
+                            <span class="nav-header-chevron"></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu nav-user-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Cambiar Avatar</a></li>
+                        <li><a class="dropdown-item" href="#">Compras</a></li>
+                        <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
+                    </ul>
+                </div>
+                {% else %}
+                <div class="menu-right flex items-center space-x-4 dropdown">
+                    <a href="#">Ingresar</a>
+                    <a href="#">Creá tu cuenta</a>
+                </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="spinner1" class="text-center spinner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div id="content1" class="no-display">
+            {% block contents %}
+            {% endblock contents %}
+        </div>
+    </main>
+    <footer class="foot bd-footer bg-gradient-to-r from-zinc-50 ">
+        <div class="container py-4 py-md-5 px-4 px-md-3">
+            <div class="row">
+                <div class="col-lg-3 mb-3 content-center">
+                    <span
+                        class="py-4 text-xl-footer font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-700 to-violet-700">Game Over</span>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+                    <h5 class="h5-footer">Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="/">Inicio</a></li>
+                        <li class="mb-2"><a href="#">Arma tu PC</a></li>
+                        <li class="mb-2"><a href="#">Pedí tu componente</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5 class="h5-footer">Categorias</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Placas de videos</a></li>
+                        <li class="mb-2"><a href="#">Procesadores</a></li>
+                        <li class="mb-2"><a href="#">Memorias</a></li>
+                        <li class="mb-2"><a href="#">Almacenamiento</a></li>
+                        <li class="mb-2"><a href="#">Todas las categorias</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5 class="h5-footer">Marcas</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Intel</a></li>
+                        <li class="mb-2"><a href="#">AMD</a></li>
+                        <li class="mb-2"><a href="#">Asus</a></li>
+                        <li class="mb-2"><a href="#">Nvidia</a></li>
+                        <li class="mb-2"><a href="#">Msi</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5 class="h5-footer">Nosotros</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">Quienes Somos</li>
+                        <li class="mb-2">Contáctenos</li>
+                    </ul>
+                    <h5 class="h5-footer">Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">FAQ</li>
+                        <li class="mb-2">Términos y Condiciones</li>
+                        <li class="mb-2">Politica de privacidad</li>
+                        <li class="mb-2">Botón de arrepentimiento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Owl carousel -->
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/owl.carousel.min.js' %}"></script>
+    </script>
+    <!-- My js -->
+    <script src="{% static '/js/main.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <!-- Other -->
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    {% block script %}{% endblock %}
+</body>
+</html>

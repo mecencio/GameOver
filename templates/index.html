@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Inicio
+{% endblock %}
+
+
+{% block contents %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="{% static 'media/index(1).webp' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'media/index(2).webp' %}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'media/index(3).webp' %}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-me-12">
+                <h3 class="owl-title"><span class="span-owl-title">Productos disponibles</span></h3>
+                <hr>
+                <div class="row owl-carousel owl-theme">
+                    {% for item in available_products %}
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <img src="{{item.image.url}}" alt="Category image" class="w-100">
+                                </div>
+                                <h4 class="text-center">{{item.name}}</h4>
+                                <a href="/products/detail-product/{{item.id}}" class="input center-block">
+                                    <button id="btn">Ver Mas!</button>   
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
