@@ -1,7 +1,6 @@
 body {
-    background-image: url(/media/login-register-background-3.jpg);
+    background-image: url(/static/media/login-register-background-3.jpg);
     background-color: #cccccc;
-    height: 500px; 
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9,7 +8,7 @@ body {
 
 }
 
-a {
+/* a {
     border: none;
     left: 0px;
     padding: 0 10px;
@@ -17,7 +16,7 @@ a {
     height: auto;
     position: relative;
 
-}
+} */
 
 a:-webkit-any-link {
     cursor: pointer;
@@ -36,25 +35,20 @@ a:-webkit-any-link {
 }
 
 .form-signin {
-    width: 100%;
-    max-width: 4200px;
-    max-height: 550px;
     padding: 15px;
     margin: 0 auto;
 }
 .form-signin {
-    font-weight: 400;
-    margin-top: 10em;
-    margin-bottom: 10em;
-    padding: 2em;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    padding: 1em;
     background-color: rgb(250, 250, 250) !important;
     border-radius: 7px;
-    padding-top: 1.5em;
+    padding-top: 1em;
     box-shadow: 0 0 10px 7px #0000003d;
 
 }
 .form-signin .form-control {
-    position: relative;
     box-sizing: border-box;
     height: auto;
     padding: 10px;

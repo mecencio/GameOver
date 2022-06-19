@@ -23,11 +23,11 @@ class Products(models.Model):
     model = models.CharField(max_length=50, null=True)
     quantity = models.IntegerField()
     inStock = models.BooleanField(default=False)
-#    image = models.ImageField(upload_to = "Produc Images", null=True)
-#    image2 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
-#    image3 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
-#    image4 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
-#    image5 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
+    image = models.ImageField(upload_to = "Produc Images", null=True)
+    image2 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
+    image3 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
+    image4 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
+    image5 = models.ImageField(upload_to = "Produc Images", null=True, blank=True)
 
     class Meta:
         verbose_name = 'producto'

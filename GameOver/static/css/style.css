@@ -29,43 +29,10 @@ a:-webkit-any-link {
 
 }
 
-.nav-header-chevron {
-    content: '';
-    position: relative;
-    color: rgba(0,0,0,0.3);
-    margin: 30px 0 0 6px;
-    vertical-align: bottom;
-    width: 6px;
-    height: 6px;
-    
-}
-
-.nav-header-chevron::before {
-    content: url(/media/icons/chevron-down-icon.png);
-    width: 6px;
-    height: 6px;
-
-}
-
-.nav-header-user {
-    content: '';
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    vertical-align: bottom;
-    
-}
-
-.nav-header-user::before {
-    content: url(/media/icons/user-icon.png);
-    height:300px;
-    width: 300px;
-    
-}
-
 .nav-user-name {
-    margin:  0 0 0 30px;
-
+    font-size: 14px;
+    margin-right: 5px;
+    padding-top: 1px;
 }
 
 .nav-user-menu {

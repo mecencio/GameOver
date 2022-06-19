@@ -120,7 +120,7 @@ Producto
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <img src="{% if product.image %}{{item.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="Category image" class="w-100">
+                                    <img src="{% if item.image %}{{item.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="{{item.name}}" class="w-100">
                                 </div>
                                 <h4>{{item.name}}</h4>
                                 <a href="/products/detail-product/{{item.id}}" class="input center-block">
@@ -147,7 +147,7 @@ Producto
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <img src="{{item.image.url}}" alt="Category image" class="w-100">
+                                    <img src="{% if item.image %}{{item.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="{{item.name}}" class="w-100">
                                 </div>
                                 <h4>{{item.name}}</h4>
                                 <a href="/products/detail-product/{{item.id}}" class="input center-block">
