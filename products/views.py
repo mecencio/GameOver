@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
-from products.models import Products
+from django.db.models import Q
+from products.models import Category, Products
 
 # Create your views here.
 class detailProduct(DetailView):
@@ -14,21 +15,33 @@ class detailProduct(DetailView):
         return context
 
 def search_view(request):
-    products = Products.objects.filter(name__contains = request.GET['search'])
-    context = {'products':products}
-    return render(request, 'products/search.html', context=context)
+    categories = Category.objects.all()
+    products = Products.objects.all()
+    brands = []
 
-def category_search(request):
-    products = Products.objects.filter(category__name__icontains = request.GET['search'])
-    context = {'products':products}
-    return render(request, 'products/search.html', context = context)
+    for product in products:
+        brands.append(product.brand)
 
-def brand_search(request):
-    products = Products.objects.filter(brand__contains = request.GET['search'])
-    context = {'products':products}
-    return render(request, 'products/search.html', context = context)
+    active_category = request.GET.get('category', '').lower()
+    # Filtro los prod por categoría (en caso de buscar por categoría)
+    if active_category:
+        products = products.filter(category__name__icontains = active_category)
 
-def model_search(request):
-    products = Products.objects.filter(model__contains = request.GET['search'])
-    context = {'products':products}
-    return render(request, 'products/search.html', context = context)
+    active_brand = request.GET.get('brand', '')
+    # Filtro los prod por marca (en caso de buscar por marca)
+    if active_brand:
+        products = products.filter(brand__icontains = active_brand)
+
+
+    query = request.GET.get('search', '')
+    if query:
+        products = products.filter(Q(name__icontains = query) | Q(brand__icontains = query) | Q(model__icontains = query))
+
+    context = {
+        'categories':categories,
+        'products':products,
+        'active_category':active_category,
+        'active_brand':active_brand,
+        'brands':brands,
+    }
+    return render(request, 'products/search.html', context)

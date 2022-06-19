@@ -37,7 +37,7 @@
                             </a>
                             <ul class="dropdown-menu"> <!-- Se va a mostrar cada categoría creada. -->
                                 {% for category in categories %}
-                                <li><a class="dropdown-item" href="/products/search-category-product/?search={{category.name}}">{{category.name}}</a>
+                                <li><a class="dropdown-item" href="{% url 'Searh product' %}?category={{category.name}}">{{category.name}}</a>
                                 </li>
                                 {% endfor %}
                             </ul>
@@ -50,7 +50,7 @@
                         </li>
                     </ul>
                 </div>
-                <form action="products/search-product/" class="block-search">
+                <form action="{% url 'Searh product' %}" class="block-search">
                     <span class="sr-only">Buscar</span>
                     <button type="submit">
                         <span class="absolute inset-y-2 right-0 flex items-center">
@@ -62,7 +62,7 @@
                     <input class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Buscar" type="text" aria-label="Search" name="search" />
                 </form>
                 <div class="menu-right flex items-center space-x-4 dropdown">
-                    <!-- include 'cart/menu_cart.html' -->
+                    {% include 'cart/menu-cart.html' %}
                 </div>
                 {% if request.user.is_authenticated %}
                 <div class="menu-right flex items-center space-x-4 dropdown">
@@ -120,21 +120,21 @@
                 <div class="col-6 col-lg-2 mb-3">
                     <h5 class="h5-footer">Categorias</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="/products/search-category-product/?search=Placas+de+videos">Placas de videos</a></li>
-                        <li class="mb-2"><a href="/products/search-category-product/?search=Procesadores">Procesadores</a></li>
-                        <li class="mb-2"><a href="/products/search-category-product/?search=Memorias">Memorias</a></li>
-                        <li class="mb-2"><a href="/products/search-category-product/?search=Almacenamiento">Almacenamiento</a></li>
-                        <li class="mb-2"><a href="/products/search-category-product/?search=">Todas las categorias</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?category=placas+de+video">Placas de videos</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?category=Procesador">Procesadores</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?category=memorias">Memorias</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?category=almacenamiento">Almacenamiento</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}">Todas las categorias</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2 mb-3">
                     <h5 class="h5-footer">Marcas</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Intel</a></li>
-                        <li class="mb-2"><a href="#">AMD</a></li>
-                        <li class="mb-2"><a href="#">Asus</a></li>
-                        <li class="mb-2"><a href="#">Nvidia</a></li>
-                        <li class="mb-2"><a href="#">Msi</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?brand=INTEL">Intel</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?brand=AMD">AMD</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?brand=Asus">Asus</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?brand=Nvidia">Nvidia</a></li>
+                        <li class="mb-2"><a href="{% url 'Searh product' %}?brand=Msi">Msi</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2 mb-3">

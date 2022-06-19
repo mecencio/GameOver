@@ -14,12 +14,16 @@
     <div class="my-5">
         <div class="row flex">
             <div class="w-1/4 px-0 flex place-content-center">
-                <ul>
-                    <li>Aca va</li>
-                    <li>los filtros</li>
-                    <li>Para buscar</li>
-                    <li>Productos</li>
-                    <li>asdasd</li>
+                <ul class="space-y-2">
+                    <li><a href="{% url 'Searh product' %}" class="{% if not active_category %}{% if not active_brand %}font-bold text-violet-800{% endif %}{% else %}text-gray-500{% endif %}">Todas las categorias</a></li>
+                    <li class="subtitle">Categorias</li>
+                    {% for category in categories %}
+                        <li><a href="{% url 'Searh product' %}?category={{ category.name }}" class="{% if category.name == active_category %}font-bold text-violet-800{% else %}text-gray-500{% endif %}">{{ category.name }}</a></li>
+                    {% endfor %}
+                    <li class="subtitle">Marcas</li>
+                    {% for brand in brands %}
+                        <li><a href="{% url 'Searh product' %}?brand={{ brand }}" class="{% if brand == active_brand %}font-bold text-violet-800{% else %}text-gray-500{% endif %}">{{ brand }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="album container w-3/4">

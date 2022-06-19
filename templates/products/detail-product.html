@@ -74,7 +74,7 @@ Producto
                         <a 
                         href="#" 
                         class="mt-6 inline-block px-8 py-4 rounded-xl bg-purple-500 text-white hover:bg-indigo-700 my-5"
-                        hx-get="/cart/add_to_cart/{{object.id}}"
+                        hx-get="{% url 'Add to cart' object.id %}"
                         hx-target="#menu-cart-button"
                         hx-swap="outerHTML"
                         >
@@ -100,7 +100,7 @@ Producto
         <div class="col-md-6 col-lg-6 col-sm-6">
             <div class="gb-main-detail-title">
                 <div class="description">
-                    <span class="title-description">Descripción</span>
+                    <span class="title-description">DESCRIPCIÓN</span>
                 </div>
             </div>
         </div>

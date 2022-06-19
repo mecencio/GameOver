@@ -61,3 +61,7 @@ body {
 .modal-body-text{
     margin-bottom: 5px;
 }
+
+.subtitle {
+    padding-top: 1.5em;
+}
