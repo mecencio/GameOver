@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from GameOver.views import index, login_view, logout_view, register_view
+from GameOver.views import index, login_view, logout_view, register_view, my_profile_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('login/', login_view, name='Login'),
     path('logout/', logout_view, name='Logout'),
     path('register/', register_view, name='Register'),
+    path('my-profile/', my_profile_view, name='My profile'),
     path('products/', include('products.urls')),
     path('cart/', include('cart.urls')),
     

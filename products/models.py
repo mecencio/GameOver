@@ -37,6 +37,7 @@ class Products(models.Model):
     def __str__(self):
         return self.name
 
+    # Si la cantidad queda en 0 se pone como sin stock. Por el contrario si se le suman unidades pasa a en stock
     def save(self, *args, **kwargs):
         if self.quantity == 0:
             self.inStock = False

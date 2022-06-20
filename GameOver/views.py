@@ -63,3 +63,9 @@ def register_view(request):
         form = userRegistrationForm()
         context = {'form':form}
         return render(request, 'auth/register.html', context=context)
+
+def my_profile_view(request):
+    if request.user.is_authenticated:
+        return render(request, 'my-profile/my-profile.html')
+    else:
+        return redirect('/login')
