@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Mi perfil
+{% endblock %}
+
+{% block style %} <link rel="stylesheet" href="{% static 'css/edit-information.css' %}"> {% endblock %}
+
+{% block contents %}
+<div class="flex">
+    <div class="w-1/6 max-w-6xl ml-52 h-60 p-6 form-signin menu-usuario">
+        <p>asd</p>
+    </div>
+    <div class="w-5/6 flex ">
+        <div class="w-4/6 max-w-4xl ml-40 p-6 form-signin">
+            <h1 class="mb-5 text-3xl uppercase">Modificar mis datos</h1>
+    
+            <form method="POST" action="{% url 'Edit information' %}" class="space-y-3">
+                {% csrf_token %}
+                <h2 class="mb-3 text-3xl uppercase">Datos personales</h2>
+                <div>
+                    {% if errors %}
+                        {% for key, value in errors %}
+                            {% if key == 'first_name' %}<div class="alert alert-danger">{{ value | escape}}</div>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <label>Nombre: <span class="text-red-500 font-bold">*</span></label>
+                    {{form.first_name}}
+                </div>
+                <div>
+                    {% if errors %}
+                        {% for key, value in errors %}
+                            {% if key == 'last_name' %}<div class="alert alert-danger">{{ value | escape}}</div>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <label>Apellido: </label>
+                    {{form.last_name}}
+                </div>
+                <div>
+                    {% if errors %}
+                        {% for key, value in errors %}
+                            {% if key == 'email' %}<div class="alert alert-danger">{{ value | escape}}</div>{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <label>Email: <span class="text-red-500 font-bold">*</span></label>
+                    {{form.email}}
+                </div>
+
+                <h2 class="mb-3 mt-5 text-3xl uppercase">Datos de envio</h2>
+                
+                <div class="flex">
+                    <div class="w-2/5 m-1">
+                        <label>Calle</label>
+                        <input type="text" placeholder="Calle" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+                    <div class="w-1/5 m-1">
+                        <label>Número</label>
+                        <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+                    <div class="w-1/5 m-1">
+                        <label>Piso</label>
+                        <input type="text" placeholder="Piso" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+                    <div class="w-1/5 m-1">
+                        <label>Dpto</label>
+                        <input type="text" placeholder="Dpto" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+                </div>
+
+                <div class="flex space-x-6">
+                    <div class="w-1/2 mb-4">
+                        <label>Zip code name</label>
+                        <input type="text" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+
+                    <div class="w-1/2 mb-4">
+                        <label>City/Place</label>
+                        <input type="text" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    </div>
+                </div>
+
+                <div>
+                    <input type="hidden" name="submitted" value="Registrarse" class="input center-block">
+                    <button class="py-4 px-6 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

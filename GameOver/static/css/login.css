@@ -6,7 +6,7 @@ body {
     background-size: cover;
 }
 
-a {
+/* a {
     border: none;
     left: 0px;
     padding: 0 10px;
@@ -14,7 +14,7 @@ a {
     height: auto;
     position: relative;
 
-}
+} */
 
 a:-webkit-any-link {
     cursor: pointer;

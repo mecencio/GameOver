@@ -1,4 +1,4 @@
-body {
+body .container {
     background-image: url(/static/media/login-register-background-3.jpg);
     background-color: #cccccc;
     background-position: center;
