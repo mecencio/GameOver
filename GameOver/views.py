@@ -87,7 +87,6 @@ def edit_information_view(request):
 
             else:
                 errors = form.errors.items()
-                print(errors)
                 form = userUpdateForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
                 context = {'errors': errors, 'form':form}
                 return render(request, 'my-profile/edit-information.html', context=context)

@@ -22,7 +22,6 @@ $(document).ready(function(){
         type:'GET',
         url: '/',
         success: function(res){
-        console.log("Entre")
         setTimeout(()=>{
             spinner.classList.add('no-display')
             content.classList.remove('no-display')

@@ -16,6 +16,9 @@
         <div><strong>Username: </strong>{{request.user.username}}</div>
         <div><strong>Email: </strong>{{request.user.email}}</div>
     </div>
+    <button class="inline-block mb-3 px-3 py-3 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
+        <a href="{% url 'Edit information' %}">Editar Información</a>
+    </button>
 
     <hr>
 
