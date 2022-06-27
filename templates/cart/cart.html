@@ -10,6 +10,11 @@
 
 {% block contents %}
 <div class="max-w-6xl mx-auto flex flex-wrap items-start py-6 px-6 xl:px-0">
+    {% if error %}
+        <div class="w-full">
+            <div class="alert alert-danger rounded-xl login-error">{{error}}</div>
+        </div>
+    {% endif %}
     <div class="products w-full lg:w-3/4">
         {% for item in cart %}
         {% include 'cart/part/cart-item.html' %}

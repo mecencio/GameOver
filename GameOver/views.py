@@ -68,8 +68,10 @@ def register_view(request):
             return render(request, 'auth/register.html', context=context)
 
 def my_profile_view(request):
+    print(request.user)
     if request.user.is_authenticated:
-        return render(request, 'my-profile/my-profile.html')
+        orders = request.user.orders.all()[:5]
+        return render(request, 'my-profile/my-profile.html', {'orders':orders})
     else:
         return redirect('/login')
 
