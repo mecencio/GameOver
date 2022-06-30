@@ -16,13 +16,18 @@
 {% endblock %}
 
 {% block contents %}
-<div class="flex mb-14">
-    <div class="w-1/6 max-w-6xl ml-52 h-60 p-6 form-signin form-edit">
-        <p>asd</p>
+<div class="md:flex mb-14">
+    <div class="w-full md:w-1/6">
+        <div class="m-4 form-signin form-edit md:w-1/6 md:max-w-6xl md:ml-52 md:h-60 md:p-6">
+            <h1>ENLACES</h1>
+            <div>
+                
+            </div>
+        </div>
     </div>
-    <div class="w-5/6 flex ">
-        <div class="w-4/6 max-w-4xl ml-40 p-6 form-signin form-edit">
-            <h1 class="mb-5 text-3xl uppercase">Modificar mis datos</h1>
+    <div class="w-full md:w-5/6 flex">
+        <div class="m-4 form-signin form-edit md:w-4/6 md:max-w-4xl md:ml-40 md:p-6">
+            <h1 class="mb-5 md:text-3xl uppercase">Modificar mis datos</h1>
     
             <form method="POST" action="{% url 'Edit information' %}" class="space-y-3">
                 {% csrf_token %}
@@ -47,8 +52,8 @@
                         {{form.last_name}}
                     </div>
                 </div>
-                <div class="flex space-x-6">
-                    <div class="w-1/2 mb-2 mx-1">
+                <div class="md:flex space-x-6">
+                    <div class="w-full md:w-1/2 mb-2 mx-1">
                         {% if errors %}
                             {% for key, value in errors %}
                                 {% if key == 'email' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
@@ -57,7 +62,7 @@
                         <label class="mx-1">Email: <span class="text-red-500 font-bold">*</span></label>
                         {{form.email}}
                     </div>
-                    <div class="w-1/2 mb-2 mx-1">
+                    <div class="w-full md:w-1/2 mb-2 mx-1">
                         <label class="mx-1">Telefono</label>
                         <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
                     </div>
@@ -65,31 +70,35 @@
 
                 <h2 class="mb-3 mt-5 text-3xl uppercase">Datos de envio</h2>
                 
-                <div class="flex space-x-6">
-                    <div class="w-2/5 mb-2 mx-1">
-                        <label class="mx-1">Calle</label>
-                        <input type="text" placeholder="Calle" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                <div class="md:flex">
+                    <div class="flex md:flex-none md:w-2/5 space-x-6">
+                        <div class="w-1/2 md:w-2/5 mb-2 mx-1">
+                            <label class="mx-1">Calle</label>
+                            <input type="text" placeholder="Calle" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                        </div>
+                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                            <label class="mx-1">Número</label>
+                            <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                        </div>
                     </div>
-                    <div class="w-1/5 mb-2 mx-1">
-                        <label class="mx-1">Número</label>
-                        <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                    </div>
-                    <div class="w-1/5 mb-2 mx-1">
-                        <label class="mx-1">Piso</label>
-                        <input type="text" placeholder="Piso" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                    </div>
-                    <div class="w-1/5 mb-2 mx-1">
-                        <label class="mx-1">Dpto</label>
-                        <input type="text" placeholder="Dpto" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                    <div class="flex md:flex-none md:w-2/5 space-x-6">
+                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                            <label class="mx-1">Piso</label>
+                            <input type="text" placeholder="Piso" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                        </div>
+                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                            <label class="mx-1">Dpto</label>
+                            <input type="text" placeholder="Dpto" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex space-x-6">
-                    <div class="w-3/4 mb-2 mx-1">
+                    <div class="w-1/2 md:w-3/4 mb-2 mx-1">
                         <label class="mx-1">City</label>
                         <input type="text" placeholder="City" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
                     </div>
-                    <div class="w-1/4 mb-2 mx-1">
+                    <div class="w-1/2 md:w-1/4 mb-2 mx-1">
                         <label class="mx-1">Zipcode</label>
                         <input type="text" placeholder="Zipcode" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
                     </div>

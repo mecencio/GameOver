@@ -9,59 +9,27 @@
 
 
 {% block contents %}
-<div class="max-w-6xl mx-auto p-6">
-    <h1 class="mb-5 text-3xl">Mi Perfil</h1>
-
-    <div class="mb-6">
-        <div><strong>Name: </strong>{{request.user.get_full_name}}</div>
-        <div><strong>Username: </strong>{{request.user.username}}</div>
-        <div><strong>Email: </strong>{{request.user.email}}</div>
+<div class="flex items-center">
+    <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500"><a class="hover:text-violet-500" href="">Profile</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Mis compras</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Salir</a></div>
     </div>
-    <button class="inline-block mb-3 px-3 py-3 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
-        <a href="{% url 'Edit information' %}">Editar Información</a>
-    </button>
-
-    <hr>
-
-    <h2 class="my-6">My orders</h2>
-    {% for order in orders %}
-        <div class="w-full mb-6 p-6 flex flex-wrap bg-gray-100 rounded-xl">
-            <div class="mb-6 flex justify-between">
-                <a href="#">Order id: {{order.id}}</a>
+    <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
+        <div class="max-w-6xl mx-auto p-6">
+            <h1 class="mb-5 text-3xl">Mi Perfil</h1>
+        
+            <div class="mb-6">
+                <div><strong>Name: </strong>{{request.user.get_full_name}}</div>
+                <div><strong>Username: </strong>{{request.user.username}}</div>
+                <div><strong>Email: </strong>{{request.user.email}}</div>
             </div>
-            <div class="w-full mb-6">
-                {% for item in order.items.all  %}
-                <div class="product mb-6 flex pr-6">
-                    <a href="#" class="w-1/4">
-                        <img src="{% if item.product.image.url %}{{item.product.image.url}}{% endif %}" alt="" class="hover:shadow-lg rounded-xl" height="150" width="150">
-                    </a>
-
-                    <div class="w-3/4 pl-6">
-                        <div class="flex justify-between">
-                            <a href="#" class="text-lg">{{ item.product.name }}</a>
-                            <p class="mb-6 pt-1 text-gray-400">{{ item.product.price }}</p>
-                        </div>
-
-                        <hr>
-
-                        <div class="flex">
-                            <div class="mt-6 w-1/5">
-                                Quantity: {{ item.quantity }}
-                            </div>
-                            <div class="mt-6 w-3/5"></div>
-                            <div class="mt-6 w-1/5 float-right">
-                                Total: {{ item.total_price }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <div>
-                <p class="text-lg">Date: {{ order.create_at | date:"d M Y" }}</p>
-                <p class="text-lg">Total: $ 199</p>
-            </div>
+            <button class="inline-block mb-3 px-3 py-3 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
+                <a href="{% url 'Edit information' %}">Editar Información</a>
+            </button>
+        
         </div>
-    {% endfor %}
+    </div>
 </div>
 {% endblock %}

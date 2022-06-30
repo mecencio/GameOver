@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from datetime import date
 from cart.cart import Cart
@@ -30,40 +31,29 @@ def checkout(request):
                 form = userOrderForm(request.POST)
 
                 if form.is_valid():
-                    first_name = form.cleaned_data['first_name']
-                    last_name = form.cleaned_data['last_name']
-                    email = form.cleaned_data['email']
-                    street = form.cleaned_data['street']
-                    number = form.cleaned_data['number']
-                    flat = form.cleaned_data['flat']
-                    apartment = form.cleaned_data['apartment']
-                    city = form.cleaned_data['city']
-                    province = form.cleaned_data['province']
-                    additionalInfo = form.cleaned_data['additionalInfo']
-                    code = form.cleaned_data['code']
-                    phone = form.cleaned_data['phone']
-
                     order = Order.objects.create(
                         user=request.user, 
-                        first_name = first_name, 
-                        last_name = last_name, 
-                        email = email, 
-                        street = street, 
-                        number = number, 
-                        flat = flat, 
-                        apartment = apartment, 
-                        city = city, 
-                        province = province, 
-                        additionalInfo = additionalInfo, 
-                        code = code, 
-                        phone = phone,
+                        first_name = form.cleaned_data['first_name'], 
+                        last_name = form.cleaned_data['last_name'], 
+                        email = form.cleaned_data['email'], 
+                        street = form.cleaned_data['street'], 
+                        number = form.cleaned_data['number'], 
+                        flat = form.cleaned_data['flat'], 
+                        apartment = form.cleaned_data['apartment'], 
+                        city = form.cleaned_data['city'], 
+                        province = form.cleaned_data['province'], 
+                        additionalInfo = form.cleaned_data['additionalInfo'], 
+                        code = form.cleaned_data['code'], 
+                        phone = form.cleaned_data['phone'],
                     )
 
+                    paid_amount = 0
                     for item in cart:
                         product = item['product']
                         price = product.price
                         quantity = int(item['quantity'])
                         total_price = price * quantity
+                        paid_amount += total_price
 
                         item = OrderItems.objects.create(
                             order=order,
@@ -73,6 +63,11 @@ def checkout(request):
                             total_price = total_price,
                         )
                     
+                    order = Order.objects.update(
+                        paid_amount = paid_amount
+                    )
+                    
+                    Cart(request).clear()
                     return redirect('My profile')
                 
                 else:
@@ -98,18 +93,22 @@ def update_cart(request, product_id, action):
         cart.add(product_id, -1, True)
     
     product = Products.objects.get(pk=product_id)
-    quantity = cart.get_item(product_id)['quantity']
-
-    item = {
-        'product' : {
-            'id' : product.id,
-            'name' : product.name,
-            'image': product.image,
-            'price' : product.price,
-        },
-        'total_price': (quantity * product.price),
-        'quantity' : quantity,
-    }
+    quantity = cart.get_item(product_id)
+    
+    if quantity:
+        quantity = quantity['quantity']
+        item = {
+            'product' : {
+                'id' : product.id,
+                'name' : product.name,
+                'image': product.image,
+                'price' : product.price,
+            },
+            'total_price': (quantity * product.price),
+            'quantity' : quantity,
+        }
+    else:
+        item = None
 
     context = {'item':item}
     response = render(request, 'cart/part/cart-item.html', context)

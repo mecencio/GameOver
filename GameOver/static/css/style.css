@@ -396,3 +396,10 @@
 .form-checkout .form-control:focus {
     z-index: 2;
 }
+
+/* CHECKOUT PAGE */
+@media (min-width: 768px) {
+    .flex-nowrap-checkout {
+        flex-wrap: nowrap !important;
+    }
+}

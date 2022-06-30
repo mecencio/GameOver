@@ -40,7 +40,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Orden'
         verbose_name_plural = 'Ordenes'
-
+        ordering = ('-create_at',)
 
 class OrderItems(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
