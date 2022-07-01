@@ -1,0 +1,77 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4">
+        <div class="container-fluid ">
+            <!-- LOGO -->
+            <a href="/">
+                <span class="nav__logo nav__logo p-6">
+                    Game Over
+                </span>
+            </a>
+            <div class="collapse navbar-collapse">
+                <!-- LINKS -->
+                <ul class="d-flex align-items-center nav__user__link">
+                    <li><a class="nav__user__link" href="/">Inicio</a></li>
+                    <li>
+                        <a class="dropdown-toggle nav__user__link" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu"> <!-- Se va a mostrar cada categoría creada. -->
+                            {% for category in categories %}
+                            <li><a class="dropdown-item nav__user__link" href="{% url 'Searh product' %}?category={{category.name}}">{{category.name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav__user__link" href="#">Armá tu PC</a>
+                    </li>
+                </ul>
+                <!-- SEARCH -->
+                <form action="{% url 'Searh product' %}" class="nav__search mx-5">
+                        <button class="position-absolute d-flex align-items-center nav__search--icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 12 12">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    <input class="nav__search--box block bg-white w-100 py-2 pl-9 pr-3" placeholder="Buscar" type="text" aria-label="Search" name="search" />
+                </form>
+                <!-- CART -->
+                <div class="d-flex align-items-center mx-5">
+                    <div hx-get="{% url 'Menu cart' %}" hx-trigger="update-menu-cart from:body" hx-swap="innerHTML">
+                        {% include 'cart/menu-cart.html' %}
+                    </div>
+                </div>
+                <!-- USER -->
+                {% if request.user.is_authenticated %}
+                    <div class="nav__user">
+                        <a class="nav__user__link--user" href="#" aria-expanded="false" role="button" data-bs-toggle="dropdown" aria-label="Menú de usuario, {{request.user.username}}">
+                            <div class="d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="mr-2 bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                </svg>
+                                <span class="nav__user--menu">{{request.user.first_name}}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="pt-1 bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu nav__user--menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item nav__user__link" href="{% url 'My profile' %}">Mi perfil</a></li>
+                            <li><a class="dropdown-item nav__user__link" href="#">Cambiar Avatar</a></li>
+                            <li><a class="dropdown-item nav__user__link" href="#">Compras</a></li>
+                            <li><a class="dropdown-item nav__user__link" href="{% url 'Logout' %}">Salir</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <div class="d-flex align-items-center nav__nouser">
+                        <a class="nav__user__link" href="{% url 'Login' %}">Ingresar</a>
+                        <a class="nav__user__link" href="{% url 'Register' %}">Creá tu cuenta</a>
+                    </div>
+                {% endif %}
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    </nav>
+</header>

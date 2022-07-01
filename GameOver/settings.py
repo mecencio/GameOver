@@ -43,6 +43,7 @@ BASE_APPS = [
 ]
 
 MY_APPS = [
+    'GameOver',
     'products',
     'cart',
     'orders',

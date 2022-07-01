@@ -1,9 +1,11 @@
+from email.headerregistry import Address
 import re
 from django.shortcuts import render, redirect
 from datetime import date
 from cart.cart import Cart
 from products.models import Products
 from GameOver.forms import userOrderForm
+from GameOver.models import userAddresses
 from orders.models import Order, OrderItems
 from django.conf import settings
 
@@ -24,7 +26,12 @@ def checkout(request):
             return render(request, 'cart/cart.html', {'error':error})
         else:
             if request.method == 'GET':
-                form = userOrderForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
+                Address = userAddresses.objects.filter(user=request.user)[:1]
+                Address = userAddresses.objects.get(pk=Address)
+                if Address:
+                    form = userOrderForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email, 'street':Address.street, 'number': Address.number, 'flat':Address.flat, 'apartment':Address.apartment, 'city':Address.city, 'province':Address.province, 'additionalInfo':Address.additionalInfo, 'code':Address.code})
+                else:
+                    form = userOrderForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
                 return render(request, 'cart/checkout.html', {'form':form})
             else:
                 cart = Cart(request)
@@ -47,6 +54,19 @@ def checkout(request):
                         phone = form.cleaned_data['phone'],
                     )
 
+                    if request.POST.get('checkbox') == 'on':
+                        userAddresses.objects.create(
+                            user=request.user, 
+                            street = form.cleaned_data['street'], 
+                            number = form.cleaned_data['number'], 
+                            flat = form.cleaned_data['flat'], 
+                            apartment = form.cleaned_data['apartment'], 
+                            city = form.cleaned_data['city'], 
+                            province = form.cleaned_data['province'], 
+                            additionalInfo = form.cleaned_data['additionalInfo'], 
+                            code = form.cleaned_data['code'], 
+                        )
+
                     paid_amount = 0
                     for item in cart:
                         product = item['product']
@@ -63,9 +83,8 @@ def checkout(request):
                             total_price = total_price,
                         )
                     
-                    order = Order.objects.update(
-                        paid_amount = paid_amount
-                    )
+                    order.paid_amount = paid_amount
+                    order.save()
                     
                     Cart(request).clear()
                     return redirect('My profile')

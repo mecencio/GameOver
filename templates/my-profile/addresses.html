@@ -17,26 +17,65 @@
 {% endblock %}
 
 {% block contents %}
-<div class="flex items-center">
+<div class="d-flex align-items-center">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
-        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500">Profile</div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Profile</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Mis compras</a></div>
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500">Direcciones</div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
-            <h1 class="mb-5 text-3xl">Mi Perfil</h1>
-        
-            <div class="mb-6">
-                <div><strong>Name: </strong>{{request.user.get_full_name}}</div>
-                <div><strong>Username: </strong>{{request.user.username}}</div>
-                <div><strong>Email: </strong>{{request.user.email}}</div>
+            <h1 class="mb-5 text-3xl">Domicilios</h1>
+    
+            {% if addresses %}
+                {% for address in addresses %}
+                <div class="w-full mb-6">
+                    <div class="flex justify-between items-center m-3 p-2 bg-gray-100 shadow border border-black rounded-xl">
+                        <div class="w-3/4 px-3">
+                            <div>
+                                {{ address.street }} 
+                                {{ address.number }} 
+                                {% if address.flat %}
+                                    Piso: {{ address.flat }} 
+                                {% endif %}
+                                {% if address.apartment %}
+                                    Dpto: {{ address.apartment }} 
+                                {% endif %}
+                            </div>
+                            <div>{{ address.city }}</div>
+                            <div>{{ address.province }}</div>
+                        </div>
+                        <div class="w-1/4 mx-5 flex justify-end">
+                            <button type="button" class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" aria-expanded="false" role="menu-button" data-bs-toggle="dropdown">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu origin-top-right absolute right-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" aria-labelledby="Dropdown">
+                                <div class="py-1" role="none">
+                                    <a href="{% url 'edit-address' address.id %}" class="text-gray-700 block px-4 py-2 text-sm hover:text-violet-500 hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0"
+                                    >
+                                        Editar
+                                    </a>
+                                    <a href="{% url 'delete-address' address.id %}" class="text-gray-700 block px-4 py-2 text-sm hover:text-white hover:bg-red-500"  role="menuitem" tabindex="-1" id="menu-item-1"
+                                    >
+                                        Eliminar
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <div class="m-3 p-5 bg-gray-200 rounded-xl"><a class="hover:text-violet-500" href="">Todavía no hay direcciones guardadas</a></div>
+            {% endif %}
+            <div class="flex justify-center">
+                <button class="w-2/4 mb-3 py-2 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
+                    <a class="hover:text-white" href="{% url 'Edit information' %}">Agregar nueva ubicación</a>
+                </button>
             </div>
-            <button class="inline-block mb-3 px-3 py-3 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
-                <a href="{% url 'Edit information' %}">Editar Información</a>
-            </button>
         
         </div>
     </div>

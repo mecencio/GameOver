@@ -2,52 +2,111 @@
     box-sizing: border-box;
 }
 
-.links-inicio {
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* header {
+    box-shadow: 0 3px 10px #0000003d;
+} */
+
+.nav__logo {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--tw-gradient-stops));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    --tw-gradient-from: #be185d;
+    --tw-gradient-to: rgb(190 24 93 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+    --tw-gradient-to: #6d28d9;
+}
+
+.nav__search {
+    transform: translateY(-0.6em);
+}
+
+.nav__search--box {
+    display: block;
+    border-width: 1px;
+    border-color: rgb(203 213 225);
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    font-size: 0.75rem; 
+    line-height: 1rem; 
+}
+
+@media (min-width: 768px) {
+    .nav__search--box {
+        font-size: 1rem; 
+        line-height: 1.5rem;
+        width: 25%;
+    }
+}
+
+
+.nav__search--box:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: rgb(14 165 233);
+    --tw-ring-color: rgb(14 165 233);
+    box-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+.nav__search--box::placeholder {
+    font-style: italic;
+    color: rgb(148 163 184);
+}
+
+.nav__search--icon {
+    background-color: transparent;
+    top: 0.5rem; 
+    bottom: 0.5rem; 
+    right: 10px;
+
+}
+
+.nav__user__link--user {
+    border: none;
+    height: auto;
+    position: relative;
+    list-style: none;
+}
+
+.nav__user__link {
     border: none;
     font-size: 14px;
     height: auto;
     position: relative;
+    list-style: none;
 }
 
-.link-cuenta {
-    border: none;
-    height: auto;
-    position: relative;
-}
-
-.links-inicio:hover {
+.nav__user__link:hover {
     color: rgb(111, 3, 189) !important;
     font-weight: bold;
 }
 
-.links-cuenta:hover {
+.nav__user__link--user:hover {
     color: rgb(111, 3, 189) !important;
 }
 
-.background-white {
-    background-color: white;
-}
 
-.nav-header {
-    box-sizing: border-box;
-    box-shadow: 0 3px 10px #0000003d;
-
-}
-
-.nav-user-name {
+.nav__user--menu {
+    color: black !important;
     font-size: 14px;
     margin-right: 5px;
     padding-top: 1px;
-}
-
-.nav-user-menu {
     left: 5px;
-
 }
 
-.block-search {
-    transform: translateY(-0.6em);
+.nav__nouser {
+    margin-left: 1rem;
 }
+
 
 .traslation-down {
     transform: translate(-.8em, .7em)
