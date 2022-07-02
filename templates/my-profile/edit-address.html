@@ -20,7 +20,7 @@
 <div class="d-flex align-items-center">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Profile</a></div>
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Mis compras</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'my purchases' %}">Mis compras</a></div>
         <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
@@ -30,76 +30,68 @@
             <form method="POST" action="{% url 'edit-address' address.id %}" class="space-y-3">
                 {% csrf_token %}
                 <h2 class="mb-3 mt-5 text-3xl uppercase">Actualización de datos</h2>
-                
+                {% if errors %}
+                    {% for key, value in errors %}
+                        {% if key == 'street' %}<div class="alert alert-danger login-error">Calle: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'number' %}<div class="alert alert-danger login-error">Numero: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'flat' %}<div class="alert alert-danger login-error">Piso: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'apartment' %}<div class="alert alert-danger login-error">Dpto: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'city' %}<div class="alert alert-danger login-error">Ciudad: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'code' %}<div class="alert alert-danger login-error">CP: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'province' %}<div class="alert alert-danger login-error">Provincia: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'additionalInfo' %}<div class="alert alert-danger login-error">Información adicional: {{ value | escape}}</div>{% endif %}
+                    {% endfor %}
+                {% endif %}
                 <div class="flex space-x-6">
                     <div class="w-full md:w-2/5 mb-2 mx-1">
                         <label class="mx-1">Calle</label>
-                        <input type="text" placeholder="Calle" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.street}}" name="street">
+                        {{form.street}}
                     </div>
                     <div class="w-1/2 md:w-1/5 mb-2 mx-1">
                         <label class="mx-1">Número</label>
-                        <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.number}}" name="number">
+                        {{form.number}}
                     </div>
                     <div class="w-1/2 md:w-1/5 mb-2 mx-1">
                         <label class="mx-1">Piso</label>
-                        <input type="text" placeholder="Piso" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.flat}}" name="flat">
+                        {{form.flat}}
                     </div>
                     <div class="w-1/2 md:w-1/5 mb-2 mx-1">
                         <label class="mx-1">Dpto</label>
-                        <input type="text" placeholder="Dpto" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.apartment}}" name="apartment">
+                        {{form.apartment}}
                     </div>
                 </div>
                 <div class="flex space-x-6">
                     <div class="w-1/2 md:w-3/4 mb-2 mx-1">
                         <label class="mx-1">Ciudad</label>
-                        <input type="text" placeholder="Ciudad" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.city}}" name="city">
+                        {{form.city}}
                     </div>
                     <div class="w-1/2 md:w-1/4 mb-2 mx-1">
                         <label class="mx-1">Codigo postal</label>
-                        <input type="text" placeholder="Cod Postal" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.code}}" name="code">
+                        {{form.code}}
                     </div>
                 </div>
                 <div class="flex space-x-6">
                     <div class="w-full mb-2 mx-1">
-                        <label class="mx-1">Province</label>
-                        <select type="text" placeholder="Provincia" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.province}}" name="province">
-                            <option value="Buenos Aires">Buenos Aires</option>
-                            <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
-                            <option value="Catamarca">Catamarca</option>
-                            <option value="Chaco">Chaco</option>
-                            <option value="Chubut">Chubut</option>
-                            <option value="Córdoba">Córdoba</option>
-                            <option value="Corrientes">Corrientes</option>
-                            <option value="Entre Ríos">Entre Ríos</option>
-                            <option value="Formosa">Formosa</option>
-                            <option value="Jujuy">Jujuy</option>
-                            <option value="La Pampa">La Pampa</option>
-                            <option value="La Rioja">La Rioja</option>
-                            <option value="Mendoza">Mendoza</option>
-                            <option value="Misiones">Misiones</option>
-                            <option value="Neuquén">Neuquén</option>
-                            <option value="Río Negro">Río Negro</option>
-                            <option value="Salta">Salta</option>
-                            <option value="San Juan">San Juan</option>
-                            <option value="San Luis">San Luis</option>
-                            <option value="Santa Cruz">Santa Cruz</option>
-                            <option value="Santa Fe">Santa Fe</option>
-                            <option value="Santiago del Estero">Santiago del Estero</option>
-                            <option value="Tierra del Fuego">Tierra del Fuego</option>
-                            <option value="Tucumán">Tucumán</option>
-                        </select>
+                        <label class="mx-1">Provincia</label>
+                        {{form.province}}
                     </div>
                 </div>
                 <div class="flex space-x-6">
                     <div class="w-full mb-2 mx-1">
                         <label class="mx-1">Información adicional</label>
-                        <input type="text" placeholder="Descripción de la fachada o indicaciones de referencia para ubicarla" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl" value="{{address.additionalInfo}}" name="additionalInfo">
+                        {{form.additionalInfo}}
                     </div>
                 </div>
-                <div class="mb-2">
-                    <input type="hidden" name="submitted" value="Guardar" class="input center-block">
-                    <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
-                </div>               
+                <div class="flex">
+                    <div class="w-1/2 mb-2 pr-2">
+                        <input type="hidden" name="submitted" value="Guardar" class="input center-block">
+                        <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                    </div>               
+                    <div class="w-1/2 mb-2 pl-2">
+                        <input type="hidden" name="submitted" value="volver" class="input center-block">
+                        <a href="{% url 'Address' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
+                    </div>       
+                </div>
             </form>
         </div>
     </div>

@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login'
+
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID = 'cart'
 
@@ -43,8 +47,8 @@ BASE_APPS = [
 ]
 
 MY_APPS = [
-    'GameOver',
     'products',
+    'profiles',
     'cart',
     'orders',
 ]
@@ -121,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
 

@@ -17,69 +17,80 @@
 {% endblock %}
 
 {% block contents %}
-<div class="flex items-center">
+<div class="d-flex align-items-center">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
-        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 select-none">Profile</div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Profile</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'my purchases' %}">Mis compras</a></div>
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
-            
-            <form method="POST" action="{% url 'My profile' %}" class="space-y-3">
-            {% csrf_token %}
-                <h1 class="mb-5 text-3xl">Mi Perfil</h1>
+            <form method="POST" action="{% url 'add-address' %}" class="space-y-3">
+                {% csrf_token %}
+                <h2 class="mb-3 mt-5 text-3xl uppercase">Nuevo domicilio</h2>
                 {% if errors %}
                     {% for key, value in errors %}
-                        {% if key == 'first_name' %}<div class="alert alert-danger login-error">Nombre: {{ value | escape}}</div>{% endif %}
-                        {% if key == 'last_name' %}<div class="alert alert-danger login-error">Apellido: {{ value | escape}}</div>{% endif %}
-                        {% if key == 'email' %}<div class="alert alert-danger login-error">Email: {{ value | escape}}</div>{% endif %}
-                        {% if key == 'image' %}<div class="alert alert-danger login-error">Foto: {{ value | escape}}</div>{% endif %}
-                        {% if key == 'phone' %}<div class="alert alert-danger login-error">Teléfono: {{ value | escape}}</div>{% endif %}
-                        {% if key == 'description' %}<div class="alert alert-danger login-error">Descripción: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'street' %}<div class="alert alert-danger login-error">Calle: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'number' %}<div class="alert alert-danger login-error">Numero: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'flat' %}<div class="alert alert-danger login-error">Piso: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'apartment' %}<div class="alert alert-danger login-error">Dpto: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'city' %}<div class="alert alert-danger login-error">Ciudad: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'code' %}<div class="alert alert-danger login-error">CP: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'province' %}<div class="alert alert-danger login-error">Provincia: {{ value | escape}}</div>{% endif %}
+                        {% if key == 'additionalInfo' %}<div class="alert alert-danger login-error">Información adicional: {{ value | escape}}</div>{% endif %}
                     {% endfor %}
                 {% endif %}
-                <div class="flex">
-                    <div>
-                        <img class="rounded-full mb-2 border-2 border-violet-500" src="{% if request.user.profile.image %}{{request.user.profile.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="image-profile" width="200" height="200">
-                        {{form.image}}
+                <div class="flex space-x-6">
+                    <div class="w-full md:w-2/5 mb-2 mx-1">
+                        <label class="mx-1">Calle</label>
+                        {{form.street}}
                     </div>
-                    <div class="mb-6">
-                        <div class="flex space-x-6">
-                            <div class="w-1/2 mb-2 mx-1">
-                                <label class="mx-1">Nombre <span class="text-red-500 font-bold">*</span></label>
-                                {{form.first_name}}
-                            </div>
-                            <div class="w-1/2 mb-2 mx-1">
-                                <label class="mx-1">Apellido <span class="text-red-500 font-bold">*</span></label>
-                                {{form.last_name}}
-                            </div>
-                        </div>
-                        <div class="flex space-x-6">
-                            <div class="w-full mb-2 mx-1">
-                                <label class="mx-1">Email <span class="text-red-500 font-bold">*</span></label>
-                                {{form.email}}
-                            </div>
-                        </div>
-                        <div class="flex space-x-6">
-                            <div class="w-full mb-2 mx-1">
-                                <label class="mx-1">Teléfono</label>
-                                {{form.phone}}
-                            </div>
-                        </div>
-                        <div class="flex space-x-6">
-                            <div class="w-full mb-2 mx-1">
-                                <label class="mx-1">Descripción</label>
-                                {{form.description}}
-                            </div>
-                        </div>
+                    <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                        <label class="mx-1">Número</label>
+                        {{form.number}}
+                    </div>
+                    <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                        <label class="mx-1">Piso</label>
+                        {{form.flat}}
+                    </div>
+                    <div class="w-1/2 md:w-1/5 mb-2 mx-1">
+                        <label class="mx-1">Dpto</label>
+                        {{form.apartment}}
                     </div>
                 </div>
-                <div class="flex justify-center w-3/4 mb-2 pr-2">
-                    <input type="hidden" name="submitted" value="Guardar" class="input center-block">
-                    <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                <div class="flex space-x-6">
+                    <div class="w-1/2 md:w-3/4 mb-2 mx-1">
+                        <label class="mx-1">Ciudad</label>
+                        {{form.city}}
+                    </div>
+                    <div class="w-1/2 md:w-1/4 mb-2 mx-1">
+                        <label class="mx-1">Codigo postal</label>
+                        {{form.code}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Provincia</label>
+                        {{form.province}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Información adicional</label>
+                        {{form.additionalInfo}}
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="w-1/2 mb-2 pr-2">
+                        <input type="hidden" name="submitted" value="Guardar" class="input center-block">
+                        <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                    </div>               
+                    <div class="w-1/2 mb-2 pl-2">
+                        <input type="hidden" name="submitted" value="volver" class="input center-block">
+                        <a href="{% url 'Address' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
+                    </div>       
                 </div>
             </form>
         </div>

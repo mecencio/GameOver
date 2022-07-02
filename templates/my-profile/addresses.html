@@ -20,14 +20,14 @@
 <div class="d-flex align-items-center">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Profile</a></div>
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Mis compras</a></div>
-        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500">Direcciones</div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'my purchases' %}">Mis compras</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 select-none">Direcciones</div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
-            <h1 class="mb-5 text-3xl">Domicilios</h1>
+            <h1 class="mb-5 text-3xl uppercase">Domicilios</h1>
     
             {% if addresses %}
                 {% for address in addresses %}
@@ -72,9 +72,9 @@
             <div class="m-3 p-5 bg-gray-200 rounded-xl"><a class="hover:text-violet-500" href="">Todavía no hay direcciones guardadas</a></div>
             {% endif %}
             <div class="flex justify-center">
-                <button class="w-2/4 mb-3 py-2 rounded-xl bg-purple-500 hover:bg-purple-700 text-white">
-                    <a class="hover:text-white" href="{% url 'Edit information' %}">Agregar nueva ubicación</a>
-                </button>
+                <a href="{% url 'add-address' %}" class="w-2/4 text-center mb-3 py-2 rounded-xl bg-purple-500 hover:bg-purple-700 text-white hover:text-white">
+                    Agregar nueva ubicación
+                </a>
             </div>
         
         </div>

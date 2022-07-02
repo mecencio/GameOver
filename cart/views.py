@@ -1,20 +1,33 @@
-from email.headerregistry import Address
-import re
 from django.shortcuts import render, redirect
-from datetime import date
 from cart.cart import Cart
 from products.models import Products
-from GameOver.forms import userOrderForm
-from GameOver.models import userAddresses
+from orders.forms import userOrderForm
+from profiles.models import userAddresses
 from orders.models import Order, OrderItems
 from django.conf import settings
 
 # Create your views here.
 def add_to_cart(request, product_id):
     cart = Cart(request)
-    cart.add(product_id)
-
+    try: 
+        if cart.cart[str(product_id)]:
+            cart.add(product_id, 1, True)
+    except:
+        cart.add(product_id)
     return render(request, 'cart/menu-cart.html')
+
+def buy_again(request, order_id):
+    order = OrderItems.objects.filter(order_id=order_id)
+    cart = Cart(request)
+    for item in order:
+        product = Products.objects.get(id=item.product_id)
+        try: 
+            if cart.cart[str(product.id)]:
+                cart.add(product.id, item.quantity, True)
+        except:
+            cart.add(product.id, (item.quantity-1), True)
+    return render(request, 'cart/menu-cart.html')
+
 
 def cart(request):
     return render(request, 'cart/cart.html')
