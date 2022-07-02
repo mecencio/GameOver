@@ -210,7 +210,7 @@
 
             <div class="mb-6 flex justify-between">
                 <span class="font-semibold">Total</span>
-                <span>$ {{ cart.get_total_cost | floatformat:2|intcomma}}</span>
+                <span>$ {{ cart.get_total_cost | intcomma}}</span>
             </div>
 
             <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500">Comprar</button>

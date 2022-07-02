@@ -25,7 +25,7 @@
                     <div class="w-3/4 pl-6">
                         <div class="flex justify-between">
                             <a href="/products/detail-product/{{item.product.id}}" class="text-lg">{{ item.product.name }}</a>
-                            <p class="mb-6 pt-1 text-gray-400">$ {{ item.product.price | floatformat:2|intcomma}}</p>
+                            <p class="mb-6 pt-1 text-gray-400">$ {{ item.product.price | intcomma}}</p>
                         </div>
 
                         <hr>
@@ -36,7 +36,7 @@
                             </div>
                             <div class="mt-6 w-3/5"></div>
                             <div class="mt-6 w-1/5 float-right">
-                                Total: $ {{ item.total_price | floatformat:2|intcomma}}
+                                Total: $ {{ item.total_price | intcomma}}
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             </div>
             <div>
                 <p class="text-lg">Date: {{ order.create_at | date:"d M Y" }}</p>
-                <p class="text-lg">Total: $ {{ order.paid_amount | floatformat:2|intcomma}}</p>
+                <p class="text-lg">Total: $ {{ order.paid_amount | intcomma}}</p>
             </div>
         </div>
     {% endfor %}

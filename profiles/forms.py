@@ -4,16 +4,16 @@ from django.contrib.auth.models import User
 
 
 class userUpdateForm(forms.ModelForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'name':'inputEmail', 'placeholder':'Ingresa tu email', 'class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
-    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'name':'inputLastName', 'placeholder':'Apellido','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
-    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'name':'inputName', 'placeholder':'Nombre','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
-    image = forms.ImageField(label='Foto de Perfil', widget=forms.FileInput(attrs={'name':'inputImage'}))
-    description = forms.CharField(label='Nombre', widget=forms.Textarea(attrs={'name':'inputDescription', 'placeholder':'Escribí algo que quieras contarnos acerca de vos','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl', 'cols':5, 'rows':5}))
-    phone = forms.IntegerField(label='Telefono', widget=forms.TextInput(attrs={'name':'phone', 'placeholder':'Telefono','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    first_name = forms.CharField(label='Nombre', widget=forms.TextInput(attrs={'placeholder':'Nombre','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'placeholder':'Apellido','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Ingresa tu email', 'class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    image = forms.ImageField(label='Foto de Perfil', widget=forms.FileInput(attrs={'name':'inputImage','id':'inputImage', 'class':'hidden'}))
+    description = forms.CharField(label='Nombre', widget=forms.Textarea(attrs={'placeholder':'Escribí algo que quieras contarnos acerca de vos','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl', 'cols':5, 'rows':5}))
+    phone = forms.CharField(label='Telefono', widget=forms.TextInput(attrs={'placeholder':'Telefono','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'email', 'image', 'description', 'phone']
         help_texts = {k:'' for k in fields}
 
     def __init__(self, *args, **kwargs):

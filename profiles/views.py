@@ -8,25 +8,21 @@ from orders.models import Order
 # Create your views here.
 @login_required
 def my_profile_view(request):
-    # try:
-    #     user = userProfile.objects.get(user=request.user)
-    # except:
-    #     user = userProfile.objects.create(user=request.user)
-    user = request.user
+    try:
+        user = userProfile.objects.get(user=request.user)
+    except:
+        user = userProfile.objects.create(user=request.user)
     if request.method == 'POST':
         form = userUpdateForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            print(form)
-            user.first_name = form.cleaned_data['first_name'], 
-            user.last_name = form.cleaned_data['last_name'], 
-            user.email = form.cleaned_data['email'],
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            request.user.email = form.cleaned_data['email']
+            request.user.save()
             if form.cleaned_data['image']:
-                user.profile.image = form.cleaned_data['image'], 
-            if form.cleaned_data['description']:
-                user.profile.description = form.cleaned_data['description'], 
-            if form.cleaned_data['phone']:
-                user.profile.phone = form.cleaned_data['phone'],
+                user.image = form.cleaned_data['image']
+            user.description = form.cleaned_data['description']
+            user.phone = form.cleaned_data['phone']
             user.save()
             return redirect('/my-profile')
         else:
@@ -35,9 +31,9 @@ def my_profile_view(request):
                 'first_name':request.user.first_name,
                 'last_name':request.user.last_name,
                 'email':request.user.email,
-                'image':user.profile.image,
-                'description':user.profile.description,
-                'phone':user.profile.phone,
+                'image':user.image,
+                'description':user.description,
+                'phone':user.phone,
             })
             context= {'errors':errors, 'form':form}
             return render(request, 'my-profile/my-profile.html', context=context)
@@ -46,12 +42,17 @@ def my_profile_view(request):
             'first_name':request.user.first_name,
             'last_name':request.user.last_name,
             'email':request.user.email,
-            'image':user.profile.image,
-            'description':user.profile.description,
-            'phone':user.profile.phone,
+            'image':user.image,
+            'description':user.description,
+            'phone':user.phone,
         })
         context= {'form':form}
         return render(request, 'my-profile/my-profile.html', context=context)
+
+@login_required
+def delete_image(request):
+    request.user.profile.image.delete()
+    return redirect('/my-profile')
 
 @login_required
 def address_view(request):

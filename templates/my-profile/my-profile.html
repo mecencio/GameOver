@@ -28,7 +28,7 @@
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
             
-            <form method="POST" action="{% url 'My profile' %}" class="space-y-3">
+            <form method="POST" action="{% url 'My profile' %}" enctype="multipart/form-data" class="w-full space-y-3">
             {% csrf_token %}
                 <h1 class="mb-5 text-3xl">Mi Perfil</h1>
                 {% if errors %}
@@ -42,9 +42,18 @@
                     {% endfor %}
                 {% endif %}
                 <div class="flex">
-                    <div>
-                        <img class="rounded-full mb-2 border-2 border-violet-500" src="{% if request.user.profile.image %}{{request.user.profile.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="image-profile" width="200" height="200">
-                        {{form.image}}
+                    <div class="mx-24">
+                        <img class="rounded-full mb-2 border-2 border-violet-500" src="{% if request.user.profile.image %}{{request.user.profile.image.url}}{% else %}{% static 'media/default-avatar.jpg' %}{% endif %}" alt="image-profile" width="200" height="200">
+                        <div class="flex">
+                            <div class="w-1/2 mb-2 pl-2">
+                                <label for="inputImage" class="w-full text-center mt-3 py-2 px-2 rounded-xl bg-purple-500 hover:bg-purple-700 text-white hover:text-white">Cambiar</label>
+                                {{form.image}}
+                            </div>
+                            <div class="w-1/2 mb-2 pl-2">
+                                <input type="hidden" name="submitted" value="volver" class="input center-block">
+                                <a href="{% url 'delete image' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Eliminar</a>
+                            </div>   
+                        </div>
                     </div>
                     <div class="mb-6">
                         <div class="flex space-x-6">
@@ -77,9 +86,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center w-3/4 mb-2 pr-2">
+                <span class="text-gray-500 ml-28 mt-5 pb-1">Los cambios se verán reflejados una vez que seleccione guardar</span>
+                <div class="flex justify-center w-3/4 mb-2 ml-24 pr-2">
                     <input type="hidden" name="submitted" value="Guardar" class="input center-block">
-                    <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                    <button class="w-full mt-1 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
                 </div>
             </form>
         </div>

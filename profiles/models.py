@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class userProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-    image = models.ImageField('Foto de perfil', null=True, blank=True)
+    image = models.ImageField('Foto de perfil', upload_to = 'profile-image', null=True, blank=True)
     description = models.CharField('Descripción:', max_length=255, null=True, blank=True)
-    phone = models.IntegerField('Número de teléfono:',null=True, blank=True)
+    phone = models.CharField('Número de teléfono:', max_length=15,null=True, blank=True)
 
 class userAddresses(models.Model):
     def __str__(self):

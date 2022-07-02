@@ -35,7 +35,7 @@
                                 <div class="w3-display-middle w3-display-hover">
                                 </div>
                                 <p class="py-1" style="letter-spacing: .5px!important;"><span><b>{{product.name}}</b></span></p>
-                                <p class="card-text py-2"><b>ARS$ {{product.price | floatformat:2|intcomma }}</b></p>
+                                <p class="card-text py-2"><b>ARS$ {{product.price | intcomma }}</b></p>
                                 <a href="/products/detail-product/{{product.id}}" class="input center-block">
                                     <button id="btn">Ver Mas!</button>   
                                 </a>
