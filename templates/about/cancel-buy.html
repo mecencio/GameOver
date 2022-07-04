@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Cancelar Compra
+{% endblock %}
+
+
+{% block contents %}
+<div class="flex justify-center">
+    <div class="w-full m-12 md:w-2/4 bg-white shadow border border-gray-500 rounded-xl">
+        <div class="max-w-6xl mx-auto p-6">
+            <form method="POST" action="{% url 'cancel buy' %}" class="space-y-3">
+                {% csrf_token %}
+                <h2 class="mb-3 mt-3 text-center text-3xl uppercase">Cancelación de compra</h2>
+                <p>Por favor complete los siguientes datos para comenzar el proceso de baja de su pedido/compra y lo contactaremos para avanzar con su solicitud.</p>
+                {% if errors %}
+                    {% for key, value in errors %}
+                        <div class="alert alert-danger login-error">{{key}}: {{ value | escape}}</div>
+                    {% endfor %}
+                {% endif %}
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Nombre: </label>
+                        {{form.name}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Email: </label>
+                        {{form.email}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Teléfono: </label>
+                        {{form.phone}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Orden: </label>
+                        {{form.order}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Descripción: </label>
+                        {{form.description}}
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-1/2 mb-2 pr-2">
+                        <input type="hidden" name="submitted" value="Enviar" class="input center-block">
+                        <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

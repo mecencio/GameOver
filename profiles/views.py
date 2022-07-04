@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from profiles.models import userAddresses, userProfile
-from profiles.forms import userUpdateForm, addressForm
+from profiles.forms import userUpdateForm, addressForm, passwordUpdateForm
 from orders.models import Order
+from about.models import cancelRequest
 
 
 # Create your views here.
+
+    #   =============
+    #   PROFILE PAGE
+    #   =============
+
 @login_required
 def my_profile_view(request):
     try:
@@ -54,17 +61,33 @@ def delete_image(request):
     request.user.profile.image.delete()
     return redirect('/my-profile')
 
+
+    #   ===============
+    #   PURCHASES PAGE
+    #   ===============
+
+@login_required
+def my_purchases_view(request):
+    orders = Order.objects.filter(user= request.user)
+    context = {}
+    context['orders'] = orders
+    try:
+        cancelOrder = cancelRequest.objects.filter(user=request.user)
+        context['cancelOrder'] = cancelOrder
+    except:
+        pass
+    return render(request, 'my-profile/my-purchases.html', context=context)
+
+
+    #   =============
+    #   ADDRESS PAGE
+    #   =============
+
 @login_required
 def address_view(request):
     addresses = userAddresses.objects.filter(user= request.user)
     context = {'addresses':addresses}
     return render(request, 'my-profile/addresses.html', context=context)
-
-@login_required
-def my_purchases_view(request):
-    orders = Order.objects.filter(user= request.user)
-    context = {'orders':orders}
-    return render(request, 'my-profile/my-purchases.html', context=context)
 
 @login_required
 def add_address_view(request):
@@ -142,25 +165,61 @@ def edit_address_view(request, address_id):
         context= {'form':form, 'address':address}
         return render(request, 'my-profile/edit-address.html', context=context)
 
-@login_required
-def edit_information_view(request):
-    if request.method == 'POST':
-        form = userUpdateForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.email = form.cleaned_data['email']
-            user.save()
-            return redirect('/my-profile')
 
+    #   =============
+    #   SECURITY PAGE
+    #   =============
+
+@login_required
+def user_security_view(request):
+    if request.method == 'POST':
+        form = passwordUpdateForm(request.POST)
+        if form.is_valid():
+            if request.user.check_password(request.POST['oldpassword']):
+                username = request.user
+                password = form.cleaned_data['password1']
+                username.set_password(password)
+                username.save()
+                user = authenticate(username=username, password=password)
+                login(request, user)
+                return redirect('/my-profile')
+            else:
+                errors = [('password',['La contraseña actual es incorrecta'])]
+                form = passwordUpdateForm()
+                context= {'errors':errors, 'form':form}
+                return render(request, 'my-profile/user-security.html', context=context)
+        else:
+            errors = list(form.errors.items())
+            if not request.user.check_password(request.POST['oldpassword']):
+                errors.append(('password',['La contraseña actual es incorrecta']))
+            form = passwordUpdateForm()
+            context= {'errors':errors, 'form':form}
+            return render(request, 'my-profile/user-security.html', context=context)
+    else:
+        form = passwordUpdateForm()
+        context= {'form':form}
+        return render(request, 'my-profile/user-security.html', context=context)
+
+def delete_account_view(request, status):
+        if status == 'advertising':
+            form = passwordUpdateForm()
+            context = {'message' : 'Tenga en cuenta que este cambio es permanente y no podrá ser revertido', 'form':form}
+            return render(request, 'my-profile/user-security.html', context=context)
+        elif status == 'delete':
+            if request.method == 'POST':
+                if request.user.check_password(request.POST['password']):
+                    request.user.delete()
+                    return redirect('/')
+                else:
+                    message = 'Tenga en cuenta que este cambio es permanente y no podrá ser revertido'
+                    password = 'La contraseña ingresada es incorrecta'
+                    form = passwordUpdateForm()
+                    context= {'message':message, 'password':password,'form':form}
+                    return render(request, 'my-profile/user-security.html', context=context)
+            else:
+                return redirect('/my-profile/security/')
         else:
             errors = form.errors.items()
-            form = userUpdateForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
-            context = {'errors': errors, 'form':form}
-            return render(request, 'my-profile/edit-information.html', context=context)
-
-    else:
-        form = userUpdateForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
-        context = {'form':form}
-        return render(request, 'my-profile/edit-information.html', context=context)
+            form = passwordUpdateForm()
+            context= {'errors':errors, 'form':form}
+            return render(request, 'my-profile/user-security.html', context=context)

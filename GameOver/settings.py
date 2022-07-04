@@ -47,10 +47,11 @@ BASE_APPS = [
 ]
 
 MY_APPS = [
-    'products',
-    'profiles',
+    'about',
     'cart',
     'orders',
+    'products',
+    'profiles',
 ]
 
 THIRD_APPS = [

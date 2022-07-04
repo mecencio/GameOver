@@ -40,11 +40,31 @@ def checkout(request):
         else:
             if request.method == 'GET':
                 Address = userAddresses.objects.filter(user=request.user)[:1]
-                Address = userAddresses.objects.get(pk=Address)
+                try:
+                    Address = userAddresses.objects.get(pk=Address)
+                except:
+                    Address = {}
                 if Address:
-                    form = userOrderForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email, 'street':Address.street, 'number': Address.number, 'flat':Address.flat, 'apartment':Address.apartment, 'city':Address.city, 'province':Address.province, 'additionalInfo':Address.additionalInfo, 'code':Address.code})
+                    form = userOrderForm(initial={
+                        'first_name': request.user.first_name, 
+                        'last_name': request.user.last_name, 
+                        'email': request.user.email, 
+                        'street':Address.street, 
+                        'number': Address.number, 
+                        'flat':Address.flat, 
+                        'apartment':Address.apartment, 
+                        'city':Address.city, 
+                        'province':Address.province, 
+                        'additionalInfo':Address.additionalInfo, 
+                        'code':Address.code,
+                        'phone': request.user.profile.phone,
+                    })
                 else:
-                    form = userOrderForm(initial={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'email': request.user.email})
+                    form = userOrderForm(initial={
+                        'first_name': request.user.first_name, 
+                        'last_name': request.user.last_name, 
+                        'email': request.user.email
+                    })
                 return render(request, 'cart/checkout.html', {'form':form})
             else:
                 cart = Cart(request)

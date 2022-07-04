@@ -29,7 +29,7 @@ class Order(models.Model):
     province = models.CharField('Provincia:', max_length=255)
     additionalInfo = models.TextField('Info Adicional:')
     code = models.CharField('CP:', max_length=8)
-    phone = models.IntegerField('Telefono:', )
+    phone = models.CharField('Telefono:', max_length=30)
     create_at = models.DateTimeField('Pedido el:', auto_now_add=True)
 
     paid = models.BooleanField('Pago', default=False)

@@ -21,6 +21,7 @@ def search_view(request):
 
     for product in products:
         brands.append(product.brand)
+    brands = set(brands)
 
     active_category = request.GET.get('category', '').lower()
     # Filtro los prod por categoría (en caso de buscar por categoría)

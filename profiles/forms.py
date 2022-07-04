@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -8,7 +9,7 @@ class userUpdateForm(forms.ModelForm):
     last_name = forms.CharField(label='Apellido', widget=forms.TextInput(attrs={'placeholder':'Apellido','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder':'Ingresa tu email', 'class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     image = forms.ImageField(label='Foto de Perfil', widget=forms.FileInput(attrs={'name':'inputImage','id':'inputImage', 'class':'hidden'}))
-    description = forms.CharField(label='Nombre', widget=forms.Textarea(attrs={'placeholder':'Escribí algo que quieras contarnos acerca de vos','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl', 'cols':5, 'rows':5}))
+    description = forms.CharField(label='Descripcion', widget=forms.Textarea(attrs={'placeholder':'Escribí algo que quieras contarnos acerca de vos','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl', 'cols':5, 'rows':5}))
     phone = forms.CharField(label='Telefono', widget=forms.TextInput(attrs={'placeholder':'Telefono','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     
     class Meta:
@@ -21,6 +22,16 @@ class userUpdateForm(forms.ModelForm):
         self.fields['image'].required = False
         self.fields['description'].required = False
         self.fields['phone'].required = False
+
+class passwordUpdateForm(UserCreationForm):
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput(attrs={'name':'inputPassword', 'placeholder':'Ingresa tu clave', 'class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    password2 = forms.CharField(label='Repita su contraseña', widget=forms.PasswordInput(attrs={'name':'inputPassword', 'placeholder':'Confirmá tu clave', 'class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    
+    class Meta:
+        model = User
+        fields = ['password1', 'password2']
+        help_texts = {k:'' for k in fields}
+
 
 class addressForm(forms.ModelForm):
     PROVINCE_CHOICES = [

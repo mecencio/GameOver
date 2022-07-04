@@ -26,7 +26,7 @@
     <header class="background-white">
         <nav class="border-b border-gray-300 back bg-indigo nav-header">
             <div class="max-w-6xl mx-auto py-2 px-6 xl:px-0 flex items-center justify-between">
-                <div class="menu-left flex items-center space-x-6">
+                <div class="w-auto menu-left flex items-center space-x-6">
                     <!--  LOGO -->
                     <span class="offcanvas-header py-4 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-700 to-violet-700">
                         Game Over
@@ -49,8 +49,13 @@
                             <a class="links-inicio" href="#">Armá tu PC</a>
                         </li>
                         <li>
-                            <a class="links-inicio" href="#">Pedí tu componente</a>
+                            <a class="hidden links-inicio" href="#">Pedí tu componente</a>
                         </li>
+                        {% if request.user.is_staff %}
+                        <li>
+                            <a class="links-inicio" href="{% url 'staff view' %}">Panel de administrador</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- SEARCH -->
@@ -90,9 +95,9 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu nav-user-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item links-inicio" href="#">Cambiar Avatar</a></li>
-                            <li><a class="dropdown-item links-inicio" href="{% url 'my purchases' %}">Compras</a></li>
                             <li><a class="dropdown-item links-inicio" href="{% url 'My profile' %}">Mi perfil</a></li>
+                            <li><a class="dropdown-item links-inicio" href="{% url 'my purchases' %}">Mis Compras</a></li>
+                            <li><a class="dropdown-item links-inicio" href="{% url 'Address' %}">Direcciones</a></li>
                             <li><a class="dropdown-item links-inicio" href="{% url 'Logout' %}">Salir</a></li>
                         </ul>
                     </div>
@@ -157,15 +162,14 @@
                 <div class="col-6 col-lg-2 mb-3">
                     <h5 class="h5-footer">Nosotros</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Quienes Somos</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Contáctenos</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'about us' %}">Quienes Somos</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'contact us' %}">Contáctenos</a></li>
                     </ul>
                     <h5 class="h5-footer">Ayuda</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">FAQ</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Términos y Condiciones</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Politica de privacidad</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Botón de arrepentimiento</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'faq' %}">FAQ</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'privacy policy' %}">Politica de privacidad</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'cancel buy' %}">Botón de arrepentimiento</a></li>
                     </ul>
                 </div>
             </div>

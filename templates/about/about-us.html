@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Sobre nosotros
+{% endblock %}
+
+
+{% block contents %}
+<div class="container">
+    <div class="flex my-10 justify-around items-center">
+        <div class="">
+            <img class="rounded-full mb-2 border-2 border-violet-500" src="{% static 'media/creador.png' %}" alt="image-profile" width="300px" height="300px">
+        </div>
+        <div class="flex flex-column items-center">
+            <div class="flex">
+                <h1 class="text-3xl pr-6">Hola!</h1>
+                <img src="{% static 'media/icons/hi.png' %}" alt="Hi">
+            </div>
+            <div class="flex flex-column items-start w-3/4">
+                <div class="flex text-xl">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>Soy Nicolás Temprano. Tengo 27 años.</p>
+                </div>
+                <div class="flex text-xl">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>Actualmente me encuentro estudiando la carrera de Licenciatura en Sistemas en la Facultad de Informática (UNLP).</p>
+                </div>
+                <div class="flex text-xl ">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>También me encuentro trabajando en una compañia de seguros aunque nada relacionado a la programación. Ahora mi objetivo es poder obtener un trabajo relacionado a la programación para ampliar mi conocimiento y adquirir experiencia.</p>
+                </div>
+                <div class="flex text-xl">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>Anteriomente a eso me encontraba estudiando para ser Contador Público. Con la pandemia me encontré que no era lo que realmente me gustaba y me cambié de carrera.</p>
+                </div>
+                <div class="flex text-xl mt-5">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>Esta página es el resultado final de mi curso de Python desarrollado en Coderhouse, a la cual le puse mucho empeño dado que la cursada realmente me gustó mucho.</p>
+                </div>
+                <div class="flex text-xl">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>La página fue diseñada con la mayor cantidad de funcionalidades posibles teniendo en mente una página real. Si encontrás un error en la misma o tenes una sugerencia te invito a que me lo comentes para poder trabajar en eso. Escribime a <span class="text-purple-500">nicolas_temprano@hotmail.com</span></p>
+                </div>
+                <div class="flex text-xl mt-5">
+                    <span class="text-violet-500 mr-5">>></span>
+                    <p>Como proyecto a futuro me gustaría dedicar o tener acercamiento a trabajar con Inteligencia Artificial, dado que es un tema super interesante y tiene el potencial de poder ayudar a muchisimas personas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

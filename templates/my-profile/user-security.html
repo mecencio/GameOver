@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
 {% load static %}
 
 {% block title %}
-    Mi perfil
+    Seguridad
 {% endblock %}
 
 {% block style %} 
@@ -16,108 +17,84 @@
 {% endblock %}
 
 {% block contents %}
-<div class="md:flex mb-14">
-    <div class="w-full md:w-1/6">
-        <div class="m-4 form-signin form-edit md:w-1/6 md:max-w-6xl md:ml-52 md:h-60 md:p-6">
-            <h1>ENLACES</h1>
-            <div>
-                
-            </div>
-        </div>
+<div class="flex items-center">
+    <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Perfil</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'my purchases' %}">Mis compras</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 select-none"><a class="hover:text-violet-500" href="{% url 'user security' %}">Seguridad</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
     </div>
-    <div class="w-full md:w-5/6 flex">
-        <div class="m-4 form-signin form-edit md:w-4/6 md:max-w-4xl md:ml-40 md:p-6">
-            <h1 class="mb-5 md:text-3xl uppercase">Modificar mis datos</h1>
-    
-            <form method="POST" action="{% url 'Edit information' %}" class="space-y-3">
+    <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
+        <div class="max-w-6xl mx-auto p-6">
+            <form method="POST" action="{% url 'user security' %}" class="space-y-3">
                 {% csrf_token %}
-                <h2 class="mb-3 text-3xl uppercase">Datos personales</h2>
-                <div class="flex space-x-6">
-                    <div class="w-1/2 mb-2 mx-1">
-                        {% if errors %}
-                            {% for key, value in errors %}
-                                {% if key == 'first_name' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <label class="mx-1">Nombre: <span class="text-red-500 font-bold">*</span></label>
-                        {{form.first_name}}
-                    </div>
-                    <div class="w-1/2 mb-2 mx-1">
-                        {% if errors %}
-                            {% for key, value in errors %}
-                                {% if key == 'last_name' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <label class="mx-1">Apellido: </label>
-                        {{form.last_name}}
-                    </div>
-                </div>
-                <div class="md:flex space-x-6">
-                    <div class="w-full md:w-1/2 mb-2 mx-1">
-                        {% if errors %}
-                            {% for key, value in errors %}
-                                {% if key == 'email' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <label class="mx-1">Email: <span class="text-red-500 font-bold">*</span></label>
-                        {{form.email}}
-                    </div>
-                    <div class="w-full md:w-1/2 mb-2 mx-1">
-                        <label class="mx-1">Telefono</label>
-                        <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                    </div>
-                </div>
-
-                <h2 class="mb-3 mt-5 text-3xl uppercase">Datos de envio</h2>
-                
-                <div class="md:flex">
-                    <div class="flex md:flex-none md:w-2/5 space-x-6">
-                        <div class="w-1/2 md:w-2/5 mb-2 mx-1">
-                            <label class="mx-1">Calle</label>
-                            <input type="text" placeholder="Calle" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                        </div>
-                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
-                            <label class="mx-1">Número</label>
-                            <input type="text" placeholder="Número" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                        </div>
-                    </div>
-                    <div class="flex md:flex-none md:w-2/5 space-x-6">
-                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
-                            <label class="mx-1">Piso</label>
-                            <input type="text" placeholder="Piso" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                        </div>
-                        <div class="w-1/2 md:w-1/5 mb-2 mx-1">
-                            <label class="mx-1">Dpto</label>
-                            <input type="text" placeholder="Dpto" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex space-x-6">
-                    <div class="w-1/2 md:w-3/4 mb-2 mx-1">
-                        <label class="mx-1">City</label>
-                        <input type="text" placeholder="City" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                    </div>
-                    <div class="w-1/2 md:w-1/4 mb-2 mx-1">
-                        <label class="mx-1">Zipcode</label>
-                        <input type="text" placeholder="Zipcode" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
-                    </div>
-                </div>
-
+                <h2 class="mb-3 mt-5 text-3xl uppercase">Cambiar contraseña</h2>
+                {% if errors %}
+                    {% for key, value in errors %}
+                        {% if key == 'password' %}<div class="alert alert-danger login-error">La contraseña actual no es correcta</div>{% endif %}
+                        {% if key == 'password1' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
+                        {% if key == 'password2' %}<div class="alert alert-danger login-error">{{ value | escape}}</div>{% endif %}
+                    {% endfor %}
+                {% endif %}
                 <div class="flex space-x-6">
                     <div class="w-full mb-2 mx-1">
-                        <label class="mx-1">Province</label>
-                        <input type="text" placeholder="Province" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                        <label class="mx-1">Contraseña actual</label>
+                        <input type="password" name="oldpassword" placeholder="Clave actual" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
                     </div>
                 </div>
-
-                <div class="mb-2">
-                    <input type="hidden" name="submitted" value="Guardar" class="input center-block">
-                    <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Nueva contraseña</label>
+                        {{form.password1}}
+                    </div>
                 </div>
-
-                
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Repetí la contraseña</label>
+                        {{form.password2}}
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="w-1/2 mb-2 pr-2">
+                        <input type="hidden" name="submitted" value="Guardar" class="input center-block">
+                        <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Cambiar contraseña</button>
+                    </div>
+                </div>
             </form>
+
+            <h2 class="mb-3 mt-5 text-3xl uppercase">Eliminar cuenta</h2>
+            <div class="flex justify-center">
+                <div class="w-2/4 mb-2 pr-2">
+                    {% if message %}
+                    <form action="{% url 'delete account' 'delete' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="alert alert-danger  login-error">{{message}}</div>
+                        {% if password %}<div class="alert alert-danger login-error">{{password}}</div>{% endif %}
+                            <div class="flex space-x-6">
+                            <div class="w-full  mb-2 mx-1">
+                                <label class="mx-1">Contraseña actual</label>
+                                <input type="password" name="password" placeholder="Clave actual" class="w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl">
+                            </div>
+                        </div>    
+                        <input type="hidden" name="submitted" value="Eliminar-cuenta" class="input center-block">
+                        <button class="w-full flex justify-center mt-3 py-2 px-2 rounded-xl text-white bg-red-500" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Eliminar mi cuenta
+                        </button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'delete account' 'advertising' %}" class="w-full flex justify-center mt-3 py-2 px-2 rounded-xl text-white bg-red-500" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                        Eliminar mi cuenta
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

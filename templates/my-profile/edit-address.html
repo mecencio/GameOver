@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-    Mi perfil
+    Editar dirección
 {% endblock %}
 
 {% block style %} 
@@ -19,10 +19,10 @@
 {% block contents %}
 <div class="d-flex align-items-center">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl">
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Profile</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'My profile' %}">Perfil</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'my purchases' %}">Mis compras</a></div>
         <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500"><a class="hover:text-violet-500" href="{% url 'Address' %}">Direcciones</a></div>
-        <div class="m-3 p-3"><a class="hover:text-violet-500" href="">Seguridad</a></div>
+        <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'user security' %}">Seguridad</a></div>
         <div class="m-3 p-3"><a class="hover:text-violet-500" href="{% url 'Logout' %}">Salir</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">

@@ -42,7 +42,7 @@ class userOrderForm(forms.ModelForm):
     province = forms.CharField(label='Provincia', widget=forms.Select(choices=PROVINCE_CHOICES, attrs={'name':'province', 'placeholder':'Provincia','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     additionalInfo = forms.CharField(label='additionalInfo', widget=forms.TextInput(attrs={'name':'additionalInfo', 'placeholder':'Descripción de la fachada o indicaciones de referencia para ubicarla','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     code = forms.CharField(label='Cod Postal', widget=forms.TextInput(attrs={'name':'code', 'placeholder':'CP','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
-    phone = forms.IntegerField(label='Telefono', widget=forms.TextInput(attrs={'name':'phone', 'placeholder':'Telefono','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
+    phone = forms.CharField(label='Telefono', widget=forms.TextInput(attrs={'name':'phone', 'placeholder':'Telefono','class':'w-full mt-2 py-3 px-6 bg-gray-200 rounded-xl'}))
     
     class Meta:
         model = User

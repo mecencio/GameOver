@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Politica de privacidad
+{% endblock %}
+
+
+{% block contents %}
+<div class="container my-14">
+    <h1 class="text-4xl bold text-center my-6">FAQ</h1>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            Hay un faltante en mi compra ¿Qué hago?
+        </h2>
+        <p class="ml-6 my-3">Si tu compra no cuenta con todo lo indicado por favor contactate con nosotros a traves del siguiente <a class="text-purple-500" href="{% url 'contact us' %}">enlace</a> para poder ayudarte.</p>
+        <p class="ml-6 my-3">En el campo ‘Pedido’ deberás ingresar el número de orden e informarnos qué es lo que falta.</p>    
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            Modificar el domicilio de entrega
+        </h2>
+        <p class="ml-6 my-3">Para modificar el domicilio de entrega podés comunicarte por favor contactate con nosotros a través del siguiente <a class="text-purple-500" href="{% url 'contact us' %}">enlace</a> para poder ayudarte.</p>
+        <p class="ml-6 my-3">Atencion: Si el Pedido ya esta despachado no se podrá cambiar el domicilio al que va dirigido.</p>    
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            Inconvenientes con la entrega
+        </h2>
+        <p class="ml-6 my-3">En el caso que no podamos concretar la entrega te contactaremos para pactar una nueva visita.</p>
+        <p class="ml-6 my-3">Si el producto no se encuentra en condiciones debes comunicarte con nosotros e indicar que el pedido no ha llegado de forma correcta. Una vez revisado se pactara para hacer la devolucion correspondiente hacia nosotros y el posterior envio del nuevo pedido.</p>    
+        <p class="ml-6 my-3">Si el inconveniente es otro o aún te quedan dudas podés contactarnos a traves del siguiente <a class="text-purple-500" href="{% url 'contact us' %}">enlace</a></p>
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            Quiero solicitar un presupuesto
+        </h2>
+        <p class="ml-6 my-3">Para solicitar un presupuesto podés comunicarte con nosotros a traves del siguiente <a class="text-purple-500" href="{% url 'contact us' %}">enlace</a></p>
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            Quiero consultar stock
+        </h2>
+        <p class="ml-6 my-3">Todo producto que esta disponible en la web indica la disponibilidad del mismo dentro de la pagina asignada al mismo.</p>
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            ¿Cómo comprar?
+        </h2>
+        <ol class="ml-6 my-3">Todo producto que esta disponible en la web indica la disponibilidad del mismo dentro de la pagina asignada al mismo.
+            <li class="list-decimal ml-6 my-3">Agregar al carrito el producto o los productos que desea.</li>
+            <li class="list-decimal ml-6 my-3">Verificar su carrito de Compra y que esten todos los productos en el.</li>
+            <li class="list-decimal ml-6 my-3">Registrarse o Ingresar con su usuario ya creado. Si aún no está registrado en nuestro sitio deberá ingresar sus datos personales.</li>
+            <li class="list-decimal ml-6 my-3">Tocar el boton "Continuar" en el carrito.</li>
+            <li class="list-decimal ml-6 my-3">Completar el formulario de compra con sus datos personales.</li>
+            <li class="list-decimal ml-6 my-3">Tocar el boton "Comprar"</li>
+        </ol>
+    </div>
+    <div class="border-2 border-transparent border-b-purple-500">
+        <h2 class="text-lg font-semibold my-3">
+            ¿Cómo sé si mi compra está registrada?
+        </h2>
+        <p class="ml-6 my-3">Podés verificarla ingresando a Mi perfil, en la sección de Mis compras. Recordá que para ingresar deberás estar registrado.</p>
+    </div>
+</div>
+{% endblock %}
