@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-    Crear categoría
+    Editar pedido de cancelación
 {% endblock %}
 
 {% block style %} 
@@ -19,31 +19,52 @@
 {% block contents %}
 <div class="d-flex align-items-start">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl sticky-md-top">
-        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add category' %}">Agregar categoría</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add category' %}">Agregar categoría</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add product' %}">Agregar producto</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify category menu' %}">Modificar categoría</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify product menu' %}">Modificar producto</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'request to cancel' %}">Ver pedidos de cancelación</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'view orders' %}">Ver ordenes de compra</a></div>
-        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'messages contact' %}">Ver consultas</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'messages contact' %}">Ver consultas</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
-            <form method="POST" action="{% url 'add category' %}" class="space-y-3">
+            <h1 class="mb-5 text-3xl uppercase">Editar Pedidos de cancelación</h1>
+            {% if success %}
+                <div class="alert alert-success login-error">{{success}}</div>
+            {% endif %}
+            {% if errors %}
+                {% for key, value in errors %}
+                    <div class="alert alert-danger login-error">{{ value | escape}}</div>
+                {% endfor %}
+            {% endif %}
+            <form method="POST" action="{% url 'edit message' message.id %}" class="space-y-3">
                 {% csrf_token %}
-                <h2 class="mb-3 mt-5 text-3xl uppercase">Agregar categoría</h2>
-                {% if message %}
-                        <div class="alert alert-success login-error">{{ message}}</div>
-                {% endif %}
-                {% if errors %}
-                    {% for key, value in errors %}
-                        <div class="alert alert-danger login-error">{{ value | escape}}</div>
-                    {% endfor %}
-                {% endif %}
+                <div class="flex flex-col justify-between m-5 p-10 bg-gray-100 shadow border border-black rounded-xl">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-lg">Asunto: {{ message.subject }}</p>
+                            <p class="text-lg">Email: {{ message.email }}</p>
+                            {% if message.status == 'Visto' %}
+                                <p class="text-lg">Estado: <span class="text-xs text-white bg-green-500 rounded-xl">{{ message.status }}</span></p>
+                            {% endif %}
+                            {% if message.status == 'Sin ver' %}
+                                <p class="text-lg">Estado: <span class="text-xs text-white bg-red-500 rounded-xl">{{ message.status }}</span></p>
+                            {% endif %}
+                            <p class="text-lg">Mensaje: {{ message.message }}</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="flex space-x-6">
                     <div class="w-full mb-2 mx-1">
-                        <label class="mx-1">Nombre de la categoría</label>
-                        {{form.name}}
+                        <label class="mx-1">Nuevo estado del pedido:</label>
+                        {{form.status}}
+                    </div>
+                </div>
+                <div class="flex space-x-6">
+                    <div class="w-full mb-2 mx-1">
+                        <label class="mx-1">Detalles del estado del pedido:</label>
+                        {{form.response}}
                     </div>
                 </div>
                 <div class="flex">
@@ -53,7 +74,7 @@
                     </div>
                     <div class="w-1/2 mb-2 pl-2">
                         <input type="hidden" name="submitted" value="volver" class="input center-block">
-                        <a href="{% url 'staff view' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
+                        <a href="{% url 'messages contact' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
                     </div>       
                 </div>
             </form>

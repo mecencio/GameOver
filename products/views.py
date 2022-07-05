@@ -18,10 +18,13 @@ def search_view(request):
     categories = Category.objects.all()
     products = Products.objects.all()
     brands = []
+    model = []
 
     for product in products:
         brands.append(product.brand)
+        model.append(product.model)
     brands = set(brands)
+    model = set(brands)
 
     active_category = request.GET.get('category', '').lower()
     # Filtro los prod por categoría (en caso de buscar por categoría)
@@ -33,6 +36,10 @@ def search_view(request):
     if active_brand:
         products = products.filter(brand__icontains = active_brand)
 
+    active_model = request.GET.get('model', '')
+    # Filtro los prod por modelo (en caso de buscar por modelo)
+    if active_model:
+        products = products.filter(model__icontains = active_model)
 
     query = request.GET.get('search', '')
     if query:
@@ -43,6 +50,8 @@ def search_view(request):
         'products':products,
         'active_category':active_category,
         'active_brand':active_brand,
+        'active_model':active_model,
         'brands':brands,
+        'model':model,
     }
     return render(request, 'products/search.html', context)

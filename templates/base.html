@@ -45,12 +45,6 @@
                                 {% endfor %}
                             </ul>
                         </li>
-                        <li>
-                            <a class="links-inicio" href="#">Armá tu PC</a>
-                        </li>
-                        <li>
-                            <a class="hidden links-inicio" href="#">Pedí tu componente</a>
-                        </li>
                         {% if request.user.is_staff %}
                         <li>
                             <a class="links-inicio" href="{% url 'staff view' %}">Panel de administrador</a>
@@ -135,8 +129,8 @@
                     <h5 class="h5-footer">Links</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a class="footer_links nav__user__link" href="/">Inicio</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Arma tu PC</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="#">Pedí tu componente</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'about us' %}">Quienes Somos</a></li>
+                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'contact us' %}">Contáctenos</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2 mb-3">
@@ -160,11 +154,6 @@
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2 mb-3">
-                    <h5 class="h5-footer">Nosotros</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'about us' %}">Quienes Somos</a></li>
-                        <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'contact us' %}">Contáctenos</a></li>
-                    </ul>
                     <h5 class="h5-footer">Ayuda</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a class="footer_links nav__user__link" href="{% url 'faq' %}">FAQ</a></li>

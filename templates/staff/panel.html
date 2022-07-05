@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-    Mis compras
+    Panel Administrador
 {% endblock %}
 
 {% block style %} 
@@ -29,38 +29,45 @@
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'add product' %}">
                     <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
                         <div class="mb-6 text-center">
                             Agregar producto
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'modify category menu' %}">
+                    <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
+                        <div class="mb-6 text-center">
+                            Modificar categoría
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'modify product menu' %}">
+                    <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
+                        <div class="mb-6 text-center">
+                            Modificar producto
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'request to cancel' %}">
                     <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
                         <div class="mb-6 text-center">
                             Ver pedidos de cancelación
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'view orders' %}">
                     <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
                         <div class="mb-6 text-center">
-                            Agregar categoría
+                            Ver ordenes de compra
                         </div>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'messages contact' %}">
                     <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
                         <div class="mb-6 text-center">
-                            Agregar categoría
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="m-3 p-10 bg-gray-100 shadow border border-black rounded-xl hover:bg-purple-700 hover:text-white hover:font-bold hover:text-lg hover:uppercase">
-                        <div class="mb-6 text-center">
-                            Agregar categoría
+                            Ver consultas
                         </div>
                     </div>
                 </a>

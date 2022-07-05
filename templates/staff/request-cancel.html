@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% load static %}
+
+{% block title %}
+    Mis compras
+{% endblock %}
+
+{% block style %} 
+    <style>
+        body {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z' fill='%23bc00ff' fill-opacity='0.11' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+{% endblock %}
+
+{% block contents %}
+<div class="d-flex align-items-start">
+    <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl sticky-md-top">
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add category' %}">Agregar categoría</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add product' %}">Agregar producto</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify category menu' %}">Modificar categoría</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify product menu' %}">Modificar producto</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'request to cancel' %}">Ver pedidos de cancelación</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'view orders' %}">Ver ordenes de compra</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'messages contact' %}">Ver consultas</a></div>
+    </div>
+    <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
+        <div class="max-w-6xl mx-auto p-6">
+            <h1 class="mb-5 text-3xl uppercase">Pedidos de cancelación</h1>
+            {% if CancelRequest %}
+            {% for order in CancelRequest %}
+                    <div class="flex flex-col justify-between m-3 p-10 bg-gray-100 shadow border border-black rounded-xl">
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-lg">Orden a cancelar: {{ order.order }}</p>
+                                <p class="text-lg">Fecha de pedido de cancelación: {{ order.cancel_date | date:"d F Y" }}</p>
+                                {% if order.status == 'Pedido ingresado' %}
+                                    <p class="text-lg">Estado: <span class="text-xs text-white bg-yellow-500 rounded-xl">{{ order.status }}</span></p>
+                                {% endif %}
+                                {% if order.status == 'En gestión' %}
+                                    <p class="text-lg">Estado: <span class="text-xs text-white bg-yellow-500 rounded-xl">{{ order.status }}</span></p>
+                                {% endif %}
+                                {% if order.status == 'Cancelación realizada' %}
+                                    <p class="text-lg">Estado: <span class="text-xs text-white bg-green-500 rounded-xl">{{ order.status }}</span></p>
+                                {% endif %}
+                                {% if order.status == 'Cancelación rechazada' %}
+                                    <p class="text-lg">Estado: <span class="text-xs text-white bg-red-500 rounded-xl">{{ order.status }}</span></p>
+                                {% endif %}
+                                <p class="text-lg">Mensaje: {{ order.description }}</p>
+                                <p class="mt-3 text-lg">Trabajado por: {{ order.employee }}</p>
+                            </div>
+                            <div class="flex flex-column items-center place-content-around space-around"> 
+                                <div class="w-auto pl-2">
+                                    <a href="{% url 'edit request to cancel' order.id %}" class="w-full text-center mt-3 py-2 px-2 text-white bg-gray-500 rounded-xl hover:bg-purple-500">
+                                        Editar
+                                    </a>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="m-3 p-5 bg-gray-200 rounded-xl">Actualmente no hay pedidos de cancelación</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

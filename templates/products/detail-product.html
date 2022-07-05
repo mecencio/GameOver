@@ -17,17 +17,17 @@
     <div class="row breadcrumb">
         <ol class="col-md-12 breadcrumb-navigation">
             <li class="">
-                <a class="" href="/products/search-category-product/?search={{object.category}}">
+                <a class="" href="{% url 'Searh product'%}?category={{object.category}}">
                     <span class="">{{object.category}}</span>
                 </a>
             </li>
             <li class="">
-                <a href="/products/search-brand-product/?search={{object.brand}}">
+                <a href="{% url 'Searh product'%}?brand={{object.brand}}">
                     <span class="">{{object.brand}}</span>
                 </a>
             </li>
             <li class="">
-                <a href="/products/search-model-product/?search={{object.model}}">
+                <a href="{% url 'Searh product'%}?model={{object.model}}">
                     <span class="">{{object.model}}</span>
                 </a>
             </li>
@@ -40,7 +40,7 @@
                     <span id="object-name">{{object.name}}</span>
                 </div>
             </div>
-            <div class="sp-loading "><img src="{{object.image.url}}" alt="{{object.name}}"></div>
+            <div class="sp-loading "><img src="{% if object.image %}{{object.image.url}}{% else %}{% static 'media/not-available.png' %}{% endif %}" alt="{{object.name}}"></div>
             <div class="sp-wrap">
                 {% if object.image %}<a href="{{object.image.url}}" alt="{{object.name}}"><img src="{{object.image.url}}" alt="{{object.name}}"></a>
                 {% else %}<a href="{% static 'media/not-available.png' %}" alt="{{object.name}}"><img src="{% static 'media/not-available.png' %}" alt="{{object.name}}"></a>{% endif %}

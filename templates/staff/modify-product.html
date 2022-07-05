@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block title %}
-    Agregar producto
+    Modificar categoría
 {% endblock %}
 
 {% block style %} 
@@ -20,23 +20,26 @@
 <div class="d-flex align-items-start">
     <div class="hidden m-12 w-1/4 md:flex flex-col bg-white shadow border border-gray-500 rounded-xl sticky-md-top">
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add category' %}">Agregar categoría</a></div>
-        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add product' %}">Agregar producto</a></div>
+        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'add product' %}">Agregar producto</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify category menu' %}">Modificar categoría</a></div>
-        <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify product menu' %}">Modificar producto</a></div>
+        <div class="m-3 p-3 bg-gray-200 rounded-xl text-violet-500 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'modify product menu' %}">Modificar producto</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'request to cancel' %}">Ver pedidos de cancelación</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'view orders' %}">Ver ordenes de compra</a></div>
         <div class="m-3 p-3 hover:bg-purple-700 hover:text-white hover:rounded-xl"><a class="hover:text-white" href="{% url 'messages contact' %}">Ver consultas</a></div>
     </div>
     <div class="w-full m-12 md:w-3/4 bg-white shadow border border-gray-500 rounded-xl">
         <div class="max-w-6xl mx-auto p-6">
-            <form method="POST" action="{% url 'add product' %}" enctype="multipart/form-data" class="space-y-3">
+            <form method="POST" action="{% url 'modify product' product.id %}" enctype="multipart/form-data" class="space-y-3">
                 {% csrf_token %}
                 <h2 class="mb-3 mt-5 text-3xl uppercase">Agregar Producto</h2>
                 {% if message %}
                         <div class="alert alert-success login-error">{{ message}}</div>
                 {% endif %}
+                {% if advert %}
+                    <div class="alert alert-danger login-error">{{ advert}}</div>
+                {% endif %}
                 {% if error %}
-                    <div class="alert alert-danger login-error">{{ error}}</div>
+                    <div class="alert alert-danger login-error">{{error}}</div>
                 {% endif %}
                 {% if errors %}
                     {% for key, value in errors %}
@@ -124,13 +127,24 @@
                     </div>
                 </div>
                 <div class="flex">
-                    <div class="w-1/2 mb-2 pr-2">
+                    <div class="w-1/3 mb-2 pr-2">
                         <input type="hidden" name="submitted" value="Guardar" class="input center-block">
                         <button class="w-full mt-3 py-2 px-2 rounded-xl text-white bg-purple-500" type="submit">Guardar</button>
                     </div>
-                    <div class="w-1/2 mb-2 pl-2">
+                    {% if advert %}
+                    <div class="w-1/3 mb-2 pl-2">
                         <input type="hidden" name="submitted" value="volver" class="input center-block">
-                        <a href="{% url 'staff view' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
+                        <a href="{% url 'delete product' product.id 'delete' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-red-500">Eliminar</a>
+                    </div>
+                    {% else %}
+                    <div class="w-1/3 mb-2 pl-2">
+                        <input type="hidden" name="submitted" value="volver" class="input center-block">
+                        <a href="{% url 'delete product' product.id 'advertising' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-red-500">Eliminar</a>
+                    </div>
+                    {% endif %}
+                    <div class="w-1/3 mb-2 pl-2">
+                        <input type="hidden" name="submitted" value="volver" class="input center-block">
+                        <a href="{% url 'modify product menu' %}" type="button" class="w-full text-center mt-3 py-2 px-2 rounded-xl text-white bg-gray-800">Volver</a>
                     </div>       
                 </div>
             </form>
