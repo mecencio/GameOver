@@ -10,6 +10,11 @@ La página fue diseñada con la mayor cantidad de funcionalidades posibles tenie
 Para mi resultó un trabajó complicado e interesante por lo que me quiero proponer a seguir manteniendolo y mejorandolo con lo que siga aprendiendo. 
 Por esto te pido que si encontrás una falla o tenés alguna sugerencia no dudes en escribirme :D 
 
+## Video requerido:
+El siguiente video a muy resumidas cuentas una pequeña explicación de lo que contiene la página web.
+ ```
+ https://youtu.be/qrgkn5lLT1k
+ ```
 
 ### QUIEN SOY:
 
