@@ -1,7 +1,7 @@
 # GameOver
 Este es un E-Commerce desarrollado para la finalización del curso python en Coderhouse.com 
 
-## ESTUDIANTE: Nicolás Temprano
+## ESTUDIANTE: Nicolás Temprano (único participante)
 
 Esta página es el resultado final de mi curso de Python desarrollado en Coderhouse, a la cual le puse mucho empeño dado que la cursada realmente me gustó mucho.
 La página fue diseñada con la mayor cantidad de funcionalidades posibles teniendo en mente una página real. 
